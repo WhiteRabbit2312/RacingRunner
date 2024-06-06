@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace RacingRunner
 {
-    public interface IObstacleFactory
+    public interface IObstacleFactory 
     {
-        ObstacleMovement CreateObstacle();
+        Obstacle CreateObstacle(float obstaclePositionZ);
     }
 }

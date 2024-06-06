@@ -6,16 +6,16 @@ namespace RacingRunner
 {
     public class SpilledOilFactory : IObstacleFactory
     {
-        private ObstacleMovement _prefab;
+        private Obstacle _prefab;
 
-        public SpilledOilFactory(ObstacleMovement obstacle)
+        public SpilledOilFactory(Obstacle obstacle)
         {
             _prefab = obstacle;
         }
 
-        public ObstacleMovement CreateObstacle()
+        public Obstacle CreateObstacle()
         {
-            ObstacleMovement prefabToSpawn = GameObject.Instantiate(_prefab);
+            Obstacle prefabToSpawn = GameObject.Instantiate(_prefab);
             return prefabToSpawn;
         }
     }

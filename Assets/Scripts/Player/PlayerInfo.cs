@@ -7,7 +7,6 @@ namespace RacingRunner
 {
     public class PlayerInfo : NetworkBehaviour
     {
-        private float _speed;
-        private float _nitro;
+        public float Speed;
     }
 }

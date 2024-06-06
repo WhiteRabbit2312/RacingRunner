@@ -6,6 +6,6 @@ namespace RacingRunner
 {
     public interface IReduceSpeed
     {
-        void ReduceSpeed();
+        void ReduceSpeed(ref float speed);
     }
 }

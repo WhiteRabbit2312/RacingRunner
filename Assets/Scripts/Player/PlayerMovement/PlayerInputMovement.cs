@@ -12,15 +12,15 @@ namespace RacingRunner
 
         private IMovement _input;
 
-        private void Awake()
+        public override void Spawned()
         {
             Runner.GetComponent<NetworkEvents>().OnInput.AddListener(OnInput);
 #if UNITY_EDITOR
 
-            _input = GetComponent<TestInput>();
+            _input = new TestInput();
 
 #elif UNITY_ANDROID
-        _input = GetComponent<MainInput>();
+        _input = new MainInput();
 #endif
         }
 

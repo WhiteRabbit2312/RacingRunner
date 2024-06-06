@@ -1,21 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Fusion;
 
 namespace RacingRunner
 {
     public class BrokenCarFactory : IObstacleFactory
     {
-        private ObstacleMovement _prefab;
+        private Obstacle _prefab;
+        private Transform _obstacleTransform;
 
-        public BrokenCarFactory(ObstacleMovement obstacle)
+        public BrokenCarFactory(Obstacle obstacle)
         {
             _prefab = obstacle;
         }
 
-        public ObstacleMovement CreateObstacle()
+        public Obstacle CreateObstacle(float obstaclePositionZ)
         {
-            ObstacleMovement prefabToSpawn = GameObject.Instantiate(_prefab);
+            _obstacleTransform.position = new Vector3(0, 0, obstaclePositionZ);
+            Obstacle prefabToSpawn = GameObject.Instantiate(_prefab, _obstacleTransform);
             return prefabToSpawn;
         }
     }

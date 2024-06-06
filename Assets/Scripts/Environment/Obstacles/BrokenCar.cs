@@ -7,7 +7,7 @@ namespace RacingRunner
 {
     public class BrokenCar : NetworkBehaviour, IReduceSpeed
     {
-        public void ReduceSpeed()
+        public void ReduceSpeed(ref float speed)
         {
             
         }

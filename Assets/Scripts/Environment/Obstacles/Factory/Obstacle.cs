@@ -5,19 +5,16 @@ using Fusion;
 
 namespace RacingRunner
 {
-    public class ObstacleMovement : NetworkBehaviour
+    public class Obstacle : NetworkBehaviour
     {
         [SerializeField] private float _speed;
         private Vector3 _dirVector;
 
         public override void FixedUpdateNetwork()
         {
-            MoveObstacle();
+            
         }
 
-        private void MoveObstacle()
-        {
-            transform.Translate(_dirVector.normalized * _speed * Time.deltaTime);
-        }
+
     }
 }
