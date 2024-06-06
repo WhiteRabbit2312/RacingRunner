@@ -5,11 +5,12 @@ using Fusion;
 
 namespace RacingRunner
 {
-    public class BrokenCar : NetworkBehaviour, IReduceSpeed
+    public class BrokenCarFactory : ChunkFactory
     {
-        public void ReduceSpeed(ref float speed)
+        public BrokenCarFactory(Chunk obstacle)
         {
-            
+            _prefab = obstacle;
         }
+
     }
 }

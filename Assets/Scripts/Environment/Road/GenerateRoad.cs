@@ -7,20 +7,22 @@ namespace RacingRunner
 {
     public class GenerateRoad : NetworkBehaviour
     {
-        [SerializeField] private Obstacle _brokenCarPrefab;
-        [SerializeField] private Obstacle _spilledOilCarPrefab;
-        [SerializeField] private Obstacle _hatchPrefab;
+        [SerializeField] private Chunk _brokenCarPrefab;
+        [SerializeField] private Chunk _spilledOilCarPrefab;
+        [SerializeField] private Chunk _hatchPrefab;
+        [SerializeField] private Chunk _nitroPrefab;
 
         [Space]
 
         [SerializeField] private readonly int _roadLength;
-        private List<IObstacleFactory> _obstaclesList = new List<IObstacleFactory>();
+        private List<ChunkFactory> _obstaclesList = new List<ChunkFactory>();
 
         public override void Spawned()
         {
             _obstaclesList.Add(new BrokenCarFactory(_brokenCarPrefab));
             _obstaclesList.Add(new HatchFactory(_hatchPrefab));
             _obstaclesList.Add(new BrokenCarFactory(_spilledOilCarPrefab));
+            _obstaclesList.Add(new NitroFactory(_nitroPrefab));
 
             GenerateMap();
         }
@@ -31,7 +33,7 @@ namespace RacingRunner
             {
                 int chunkId = ChunkId();
                 float step = GenerationStep();
-                _obstaclesList[chunkId].CreateObstacle(step * i);
+                _obstaclesList[chunkId].CreateChunk(step * i);
             }
         }
 

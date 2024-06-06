@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Fusion;
 
 namespace RacingRunner
 {
-    public class SpilledOil : NetworkBehaviour, IReduceSpeed
+    public class NitroFactory : ChunkFactory
     {
-        public void ReduceSpeed(ref float speed)
+
+        public NitroFactory(Chunk obstacle)
         {
-            
+            _prefab = obstacle;
         }
+
     }
 }

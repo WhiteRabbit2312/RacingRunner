@@ -5,16 +5,17 @@ using Fusion;
 
 namespace RacingRunner
 {
-    public class Obstacle : NetworkBehaviour
+    public class Hatch : Chunk
     {
-        [SerializeField] private float _speed;
-        private Vector3 _dirVector;
+        private void DiscardCar(NetworkTransform carTransform)
+        {
+            //take car transform and discard it
+        }
 
         public override void FixedUpdateNetwork()
         {
-            
+            DetectHit();
         }
-
 
     }
 }

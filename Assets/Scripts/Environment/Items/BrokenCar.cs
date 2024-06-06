@@ -5,9 +5,11 @@ using Fusion;
 
 namespace RacingRunner
 {
-    public class PlayerInfo : NetworkBehaviour
+    public class BrokenCar : Chunk
     {
-        public float Speed;
-        public float Nitro;
+        public override void FixedUpdateNetwork()
+        {
+            DetectHit();
+        }
     }
 }
