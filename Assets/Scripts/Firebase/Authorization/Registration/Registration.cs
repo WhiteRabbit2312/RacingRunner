@@ -15,17 +15,23 @@ public class Registration : MonoBehaviour
 
     [SerializeField] private Button _registrationButton;
 
-    private Coroutine _registrationCoroutine;
-    private bool _nameExist;
+    private UserInDatabase _userInDatabase;
+    private RegistrationFields _registrationFields;
+    private Hints _hints;
+
+    private int _startScore = 0;
 
     void Start()
     {
         _registrationButton.onClick.AddListener(HandRegistrationStateClicked);
+        _hints = GetComponent<Hints>();
+        _userInDatabase = GetComponent<UserInDatabase>();
     }
 
     private void HandRegistrationStateClicked()
     {
-        _registrationCoroutine = StartCoroutine(FindName());
+        if(_registrationFields.CheckAuthorization())
+            StartCoroutine(TryRegistrate());
     }
 
     private IEnumerator CheckRegistration(string email, string password)
@@ -43,17 +49,24 @@ public class Registration : MonoBehaviour
                 Debug.LogError("CreateUserWithEmailAndPasswordAsync encountered an error: " + task.Exception);
                 return;
             }
+            /*
+            // Firebase user has been created.
+            Firebase.Auth.AuthResult result = task.Result;
+            Debug.LogFormat("Firebase user created successfully: {0} ({1})",
+                result.User.DisplayName, result.User.UserId);*/
 
-            
         });
+
+        string userId = AuthorizationManager.Instance.Auth.CurrentUser.UserId;
+        _userInDatabase.WriteNewUser(userId);
+        _userInDatabase.WriteName(userId, _nameField.text);
+        _userInDatabase.WriteScore(userId, _startScore);
 
         yield return new WaitUntil(predicate: () => registrationTask.IsCompleted);
     }
 
-    
-    private IEnumerator FindName()
+    private IEnumerator TryRegistrate()
     {
-        _nameExist = false;
         var task = DatabaseManager.Instance.Reference.Child("User").GetValueAsync();
 
         yield return new WaitUntil(() => task.IsCompleted);
@@ -70,18 +83,23 @@ public class Registration : MonoBehaviour
             {
                 if (_nameField.text == item.Child("name").Value.ToString())
                 {
-                    _nameExist = true;
+                    _hints.NameExists();
                     yield return null;
                 }
 
             }
 
-            if (!_nameExist)
-            {
-                StartCoroutine(CheckRegistration(_emailField.text, _passwordField.text));
+            StartCoroutine(CheckRegistration(_emailField.text, _passwordField.text));
 
-            }
+
         }
+    }
+
+    
+
+    private void OnDestroy()
+    {
+        _registrationButton.onClick.RemoveListener(HandRegistrationStateClicked);
     }
 
 }

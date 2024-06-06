@@ -26,7 +26,6 @@ public class DatabaseManager : MonoBehaviour
 
     void Awake()
     {
-
         DontDestroyOnLoad(this);
 
         reference = FirebaseDatabase.DefaultInstance.RootReference;
@@ -34,9 +33,7 @@ public class DatabaseManager : MonoBehaviour
 
         if (_instance == null)
         {
-
             _instance = this;
-
         }
     }
 }
