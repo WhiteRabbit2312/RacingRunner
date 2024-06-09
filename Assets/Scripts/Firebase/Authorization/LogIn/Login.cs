@@ -9,9 +9,12 @@ public class Login : MonoBehaviour
     [SerializeField] private TMP_InputField _emailField;
     [SerializeField] private TMP_InputField _passwordField;
     [SerializeField] private Button _logInButton;
+    
+    private Hints _hints;
 
     void Start()
     {
+        _hints = GetComponent<Hints>();
         _logInButton.onClick.AddListener(HandRegistrationStateClicked);
     }
 
@@ -28,6 +31,7 @@ public class Login : MonoBehaviour
             if (task.IsCanceled)
             {
                 Debug.LogError("SignInWithEmailAndPasswordAsync was canceled.");
+                _hints.EmailOrPasswordWrong();
                 return;
             }
             if (task.IsFaulted)

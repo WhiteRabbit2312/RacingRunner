@@ -9,7 +9,7 @@ namespace RacingRunner
     {
         [SerializeField] private LayerMask _layerMask;
         [SerializeField] protected float Radius;
-        [SerializeField] protected int ReduseSpeedAmount;
+        [SerializeField] protected int ChangeStat;
 
         public override void FixedUpdateNetwork()
         {
@@ -18,7 +18,7 @@ namespace RacingRunner
 
         public virtual void Effect(ref float stat)
         {
-            stat -= ReduseSpeedAmount;
+            stat -= ChangeStat;
         }
 
         public virtual void DetectHit()
@@ -29,6 +29,7 @@ namespace RacingRunner
             {
                 if (hit.gameObject.TryGetComponent<PlayerInfo>(out PlayerInfo playerInput))
                 {
+                    Debug.LogError("Hit");
                     Effect(ref playerInput.Speed);
 
                 }

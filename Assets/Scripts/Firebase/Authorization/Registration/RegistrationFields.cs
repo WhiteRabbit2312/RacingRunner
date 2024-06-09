@@ -19,7 +19,7 @@ public class RegistrationFields : MonoBehaviour
    + @"([a-zA-Z]+[\w-]+\.)+[a-zA-Z]{2,4})$";
 
     private const int MinPasswordLength = 6;
-    private const int MaxPasswordLength = 10;
+    private const int MaxPasswordLength = 15;
 
     private void Awake()
     {

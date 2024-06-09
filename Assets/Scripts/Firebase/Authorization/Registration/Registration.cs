@@ -95,8 +95,6 @@ public class Registration : MonoBehaviour
         }
     }
 
-    
-
     private void OnDestroy()
     {
         _registrationButton.onClick.RemoveListener(HandRegistrationStateClicked);

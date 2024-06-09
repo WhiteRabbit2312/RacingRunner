@@ -13,20 +13,24 @@ namespace RacingRunner
         [SerializeField] private Vector3 _spawnPoint;
         [SerializeField] private Button _connectButton;
 
+        public static BasicSpawner Instance;
+
+        private int _scene = 2;
         public List<NetworkObject> PlayersOnScene = new List<NetworkObject>();
-        private NetworkRunner _runner;
+        [HideInInspector] public NetworkRunner NetRunner;
 
         private void Awake()
         {
+            Instance = this;
             _connectButton.onClick.AddListener(ConnectButton);
         }
 
         public async void StartGame(GameMode mode)
         {
-            if (_runner != null)
+            if (NetRunner != null)
                 return;
 
-            _runner = gameObject.AddComponent<NetworkRunner>();
+            NetRunner = gameObject.AddComponent<NetworkRunner>();
 
             var scene = SceneRef.FromIndex(SceneManager.GetActiveScene().buildIndex);
             var sceneInfo = new NetworkSceneInfo();
@@ -35,11 +39,11 @@ namespace RacingRunner
                 sceneInfo.AddSceneRef(scene, LoadSceneMode.Additive);
             }
 
-            await _runner.StartGame(new StartGameArgs()
+            await NetRunner.StartGame(new StartGameArgs()
             {
                 GameMode = mode,
                 SessionName = "TestRoom",
-                Scene = SceneRef.FromIndex(1),
+                Scene = SceneRef.FromIndex(_scene),
                 SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>()
             });
         }

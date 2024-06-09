@@ -241,8 +241,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e99cd8278ee34414f80937ae59689032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftPosition: -1
-  _rightPosition: 1
+  _leftPosition: -10
+  _rightPosition: 10
 --- !u!114 &1481339098337924777
 MonoBehaviour:
   m_ObjectHideFlags: 0

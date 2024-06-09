@@ -12,10 +12,5 @@ namespace RacingRunner
             //take car transform and discard it
         }
 
-        public override void FixedUpdateNetwork()
-        {
-            DetectHit();
-        }
-
     }
 }

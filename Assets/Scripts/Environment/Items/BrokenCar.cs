@@ -7,9 +7,6 @@ namespace RacingRunner
 {
     public class BrokenCar : Chunk
     {
-        public override void FixedUpdateNetwork()
-        {
-            DetectHit();
-        }
+
     }
 }

@@ -38,8 +38,6 @@ public class AuthorizationManager : MonoBehaviour
 
     }
 
-
-
     private void OnDestroy()
     {
         _auth = null;
