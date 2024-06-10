@@ -15,9 +15,11 @@ namespace RacingRunner
         private PlayerInfo _playerInfo;
 
         private IMovement _input;
+        private PlayerPosition _playerPosition;
 
         public override void Spawned()
         {
+            _playerPosition = PlayerPosition.Center;
             _playerInfo = GetComponent<PlayerInfo>();
 
 #if UNITY_EDITOR
@@ -32,12 +34,16 @@ namespace RacingRunner
         private void Update()
         {
             _input.Controller();
+        }
+
+        public override void FixedUpdateNetwork()
+        {
             Movement();
         }
 
         private void Movement()
         {
-            transform.Translate(Vector3.forward * _playerInfo.Speed * Time.deltaTime);
+            transform.Translate(Vector3.forward * _playerInfo.Speed * Runner.DeltaTime);
 
             //Debug.LogError("On input");
 
@@ -45,14 +51,36 @@ namespace RacingRunner
             {
                 //Debug.LogError("Pressed rights");
                 StopAllCoroutines();
-                StartCoroutine(ChangePosition(_rightPosition));
+                if (_playerPosition == PlayerPosition.Center)
+                {
+                    StartCoroutine(ChangePosition(_rightPosition));
+                    _playerPosition = PlayerPosition.Right;
+                }
+
+                else if (_playerPosition == PlayerPosition.Left)
+                {
+                    StartCoroutine(ChangePosition(_centerPosition));
+                    _playerPosition = PlayerPosition.Center;
+                }
             }
 
             if (_input.Left())
             {
                 //Debug.LogError("Pressed left");
                 StopAllCoroutines();
-                StartCoroutine(ChangePosition(_leftPosition));
+
+                if(_playerPosition == PlayerPosition.Center)
+                {
+                    StartCoroutine(ChangePosition(_leftPosition));
+                    _playerPosition = PlayerPosition.Left;
+                }
+
+                else if (_playerPosition == PlayerPosition.Right)
+                {
+                    StartCoroutine(ChangePosition(_centerPosition));
+                    _playerPosition = PlayerPosition.Center;
+                }
+                
             }
 
         }

@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 7049741242236216442}
   - component: {fileID: 6173710219342051025}
   - component: {fileID: 4966066520471939080}
+  - component: {fileID: 7775761101953595921}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -181,8 +182,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.12, y: 2.1783047, z: 4.1412945}
-  m_Center: {x: 0, y: 1.0219765, z: 0.11045122}
+  m_Size: {x: 2.12, y: 2.2, z: 4.1412945}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &8208201154485103349
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -229,6 +230,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 6173710219342051025}
   - {fileID: 4966066520471939080}
+  - {fileID: 7775761101953595921}
 --- !u!114 &6173710219342051025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,6 +261,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 20
   Nitro: 0
+--- !u!114 &7775761101953595921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5991806648518576269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a591d221a634417e9827eb58e17de84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 1
+  _interpolationTarget: {fileID: 0}
+  UsePreciseRotation: 0
+  UseRenderSleepThresholds: 1
+  RenderThresholds:
+    UseEnergy: 1
+    Position: 0.01
+    Rotation: 0.01
+    Scale: 0.01
 --- !u!1001 &1134404842592364089
 PrefabInstance:
   m_ObjectHideFlags: 0

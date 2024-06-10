@@ -254,7 +254,7 @@ MonoBehaviour:
   _hatchPrefab: {fileID: 1530247819772842172, guid: 3b6e83e6ab9566c409acede4a49fa096, type: 3}
   _nitroPrefab: {fileID: 3273990435370951788, guid: 6db4143ba61fa9e4e89bf0b984f5734e, type: 3}
   _emptyPrefab: {fileID: 6362002448351758073, guid: 22d52aa4995f1ad4c940eb2ad1d4812e, type: 3}
-  _testChunk: 0
+  _testChunk: 2
   _roadLength: 50
 --- !u!1 &1607405396
 GameObject:
@@ -355,5 +355,5 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1607405398}
-  - {fileID: 918728912}
   - {fileID: 629274572}
+  - {fileID: 918728912}

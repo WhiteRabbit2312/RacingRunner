@@ -7,26 +7,31 @@ namespace RacingRunner
 {
     public class SpilledOil : Chunk
     {
+        private float _tempSpeed;
+
         public override void DetectHit()
         {
             base.DetectHit();
             if (MyPlayerInfo != null)
             {
+                _tempSpeed = MyPlayerInfo.Speed;
                 Effect(ref MyPlayerInfo.Speed);
+                MyPlayerInfo.Speed = _tempSpeed;
                 DestroyItem();
             }
 
-
         }
 
-        public override void Effect(ref float speed)
+
+        public override void Effect(ref float stat)
         {
-            
+            base.Effect(ref stat);
+            StartCoroutine(Timer());
         }
 
-        private void Timer()
+        private IEnumerator Timer()
         {
-
+            yield return new WaitForSeconds(5f);
         }
     }
 }

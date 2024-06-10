@@ -7,12 +7,14 @@ namespace RacingRunner
 {
     public class Hatch : Chunk
     {
-        private float offsetZ = 5f;
+        private float _offsetZ = 10f;
+
         private void DiscardCar(ref NetworkTransform netObjPlayer)
         {
+            Debug.LogError("Discard car");
             //take car transform and discard it
             Vector3 vectorPlayer = netObjPlayer.transform.position;
-            netObjPlayer.transform.position = new Vector3(vectorPlayer.x, vectorPlayer.y, vectorPlayer.z - offsetZ);
+            netObjPlayer.transform.position = new Vector3(vectorPlayer.x, vectorPlayer.y, vectorPlayer.z - _offsetZ);
         }
 
         public override void DetectHit()
