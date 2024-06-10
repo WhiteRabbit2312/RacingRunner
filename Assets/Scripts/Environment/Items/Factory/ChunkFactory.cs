@@ -10,9 +10,9 @@ namespace RacingRunner
         protected NetworkObject _prefab;
         public NetworkObject CreateChunk(float obstaclePositionZ)
         {
-            Debug.LogError("Chunk spawned" + obstaclePositionZ);
+            //Debug.LogError("Chunk spawned" + obstaclePositionZ);
             Vector3 _obstaclePosition = new Vector3(0, 0, obstaclePositionZ);
-            Debug.LogError("Chunk prefab: " + _prefab);
+            //Debug.LogError("Chunk prefab: " + _prefab);
 
             if (BasicSpawner.Instance.NetRunner != null)
             {

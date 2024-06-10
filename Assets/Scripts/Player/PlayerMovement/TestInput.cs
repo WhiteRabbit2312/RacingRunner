@@ -12,12 +12,22 @@ namespace RacingRunner
 
         public bool Left()
         {
-            return _toLeft;
+            if (_toLeft)
+            {
+                _toLeft = false;
+                return true;
+            }
+            return false;
         }
 
         public bool Right()
         {
-            return _toRight;
+            if (_toRight)
+            {
+                _toRight = false;
+                return true;
+            }
+            return false;
         }
 
         public void Controller()
@@ -34,8 +44,6 @@ namespace RacingRunner
                 _toRight = true;
             }
 
-            _toLeft = false;
-            _toRight = false;
         }
     }
 }

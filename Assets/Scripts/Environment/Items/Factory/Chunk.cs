@@ -7,12 +7,16 @@ namespace RacingRunner
 {
     public class Chunk : NetworkBehaviour
     {
-        [SerializeField] private LayerMask _layerMask;
+        [SerializeField] protected LayerMask LayerMask;
         [SerializeField] protected float Radius;
-        [SerializeField] protected int ChangeStat;
+        [SerializeField] protected float ChangeStat;
 
+        protected PlayerInfo MyPlayerInfo;
+
+        private const int ChildIdx = 0;
         public override void FixedUpdateNetwork()
         {
+            Debug.LogError("Chunk");
             DetectHit();
         }
 
@@ -23,17 +27,26 @@ namespace RacingRunner
 
         public virtual void DetectHit()
         {
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, Radius, _layerMask);
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, Radius, LayerMask);
 
             foreach (Collider hit in hitColliders)
             {
-                if (hit.gameObject.TryGetComponent<PlayerInfo>(out PlayerInfo playerInput))
+                if (hit.gameObject.TryGetComponent<PlayerInfo>(out PlayerInfo playerInfo))
                 {
+                    MyPlayerInfo = playerInfo;
                     Debug.LogError("Hit");
-                    Effect(ref playerInput.Speed);
+                    //Effect(ref playerInput.Speed);
+
+                    //DestroyItem();
 
                 }
             }
+        }
+
+        public virtual void DestroyItem()
+        {
+            Transform netObj = Object.transform.GetChild(ChildIdx);
+            Destroy(netObj.gameObject);
         }
     }
 }

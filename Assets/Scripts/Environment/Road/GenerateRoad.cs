@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 
-
 namespace RacingRunner 
 {
     public class GenerateRoad : NetworkBehaviour
@@ -14,6 +13,8 @@ namespace RacingRunner
         [SerializeField] private NetworkObject _nitroPrefab;
         [SerializeField] private NetworkObject _emptyPrefab;
 
+        [SerializeField] private int _testChunk;
+
         [Networked] int _chunkId { get; set; }
 
         [Space]
@@ -23,13 +24,12 @@ namespace RacingRunner
 
         public override void Spawned()
         {
-            
             _obstaclesList.Add(new BrokenCarFactory(_brokenCarPrefab));
             _obstaclesList.Add(new HatchFactory(_hatchPrefab));
             _obstaclesList.Add(new SpilledOilFactory(_spilledOilCarPrefab));
             _obstaclesList.Add(new NitroFactory(_nitroPrefab));
             _obstaclesList.Add(new EmptyChunkFactory(_emptyPrefab));
-            Debug.LogError("Road spawned");
+            //Debug.LogError("Road spawned");
             GenerateMap();
         }
 
@@ -37,8 +37,8 @@ namespace RacingRunner
         {
             for(int i = 0; i < _roadLength; ++i)
             {
-                Debug.LogError("Spawned chunk: " + i);
-                _chunkId = ChunkId();
+                //Debug.LogError("Spawned chunk: " + i);
+                _chunkId = _testChunk; //ChunkId();
                 float step = GenerationStep();
                 _obstaclesList[_chunkId].CreateChunk(step * i);
             }

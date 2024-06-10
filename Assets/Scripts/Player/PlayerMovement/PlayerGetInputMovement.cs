@@ -7,10 +7,12 @@ namespace RacingRunner
 {
     public class PlayerGetInputMovement : NetworkBehaviour
     {
-        [SerializeField] private float _speed;
+        /*
         public override void FixedUpdateNetwork()
         {
             transform.Translate(Vector3.forward);
+
+            Debug.LogError("Get input bool " + GetInput(out NetworkInputData data1));
 
             if (GetInput(out NetworkInputData data))
             {
@@ -32,6 +34,6 @@ namespace RacingRunner
                 yield return new WaitForEndOfFrame();
             }
 
-        }
+        }*/
     }
 }

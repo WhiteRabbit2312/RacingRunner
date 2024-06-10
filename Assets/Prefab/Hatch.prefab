@@ -153,6 +153,7 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 6105903494053595071}
+  - {fileID: 989557746132380058}
 --- !u!1 &7286497381349993668
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,6 +167,7 @@ GameObject:
   - component: {fileID: 9186696533520640865}
   - component: {fileID: 4001491868206373256}
   - component: {fileID: 6105903494053595071}
+  - component: {fileID: 989557746132380058}
   m_Layer: 0
   m_Name: Hatch bonus
   m_TagString: Untagged
@@ -276,3 +278,16 @@ MonoBehaviour:
     m_Bits: 4294967295
   Radius: 2
   ChangeStat: 2
+--- !u!114 &989557746132380058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7286497381349993668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20f968d16534e5e4ca8c15f002bf44ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectPositions: {fileID: 11400000, guid: 779d53389ef78ce4ca5f2cae0ef0c73c, type: 2}

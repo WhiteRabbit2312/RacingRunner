@@ -8,6 +8,11 @@ namespace RacingRunner
     public class PlayerInfo : NetworkBehaviour
     {
         public float Speed;
-        public float Nitro;
+        [HideInInspector] public float Nitro;
+
+        public override void FixedUpdateNetwork()
+        {
+            Debug.LogError("Speed: " + Speed);
+        }
     }
 }
