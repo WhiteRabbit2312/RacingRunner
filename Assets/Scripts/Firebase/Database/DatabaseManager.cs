@@ -19,8 +19,11 @@ public class DatabaseManager : MonoBehaviour
 
     public DatabaseReference Reference
     {
-        get;
-        set;
+        get
+        {
+            return reference;
+        }
+
 
     }
 
@@ -28,8 +31,7 @@ public class DatabaseManager : MonoBehaviour
     {
         DontDestroyOnLoad(this);
 
-        reference = FirebaseDatabase.GetInstance("https://racingrunner-8ff96-default-rtdb.europe-west1.firebasedatabase.app/").RootReference;
-        Reference = reference;
+        reference = FirebaseDatabase.DefaultInstance.RootReference;
 
         if (_instance == null)
         {

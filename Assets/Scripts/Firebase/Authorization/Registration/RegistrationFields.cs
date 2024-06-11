@@ -28,8 +28,10 @@ public class RegistrationFields : MonoBehaviour
 
     public bool CheckAuthorization()
     {
-        if(IsEmailValid() && IsPasswordsMatch() && CheckPasswordLength())
+        
+        if (IsEmailValid() && CheckPasswordLength() && IsPasswordsMatch())
         {
+            Debug.LogWarning("Check auth");
             return true;
         }
 
@@ -42,41 +44,52 @@ public class RegistrationFields : MonoBehaviour
 
     private bool IsEmailValid()
     {
-        if (!string.IsNullOrEmpty(_emailField.text))
+
+        if (Regex.IsMatch(_emailField.text, EMAIL_PATTERN))
         {
-            return Regex.IsMatch(_emailField.text, EMAIL_PATTERN);
+            Debug.LogWarning("Verify email");
+            return true;
         }
+
         else
         {
+            Debug.LogWarning("Wrong email");
             _hints.SymbolEmailWrong();
             return false;
         }
+
     }
 
     private bool IsPasswordsMatch()
     {
-        if (!string.IsNullOrEmpty(_verifyPasswordField.text) && _passwordField.text != _verifyPasswordField.text)
+        
+        if (!string.IsNullOrEmpty(_verifyPasswordField.text) && _passwordField.text == _verifyPasswordField.text)
         {
-            _hints.SymbolPasswordWrong();
-            return false;
+            Debug.LogWarning("Check passwords");
+            return true;
         }
 
         else
         {
-            return true;
+            _hints.SymbolPasswordWrong();
+            return false;
         }
     }
 
     private bool CheckPasswordLength()
     {
-        if (_passwordField.text.Length < MinPasswordLength && _passwordField.text.Length > MaxPasswordLength)
+        
+        if (_passwordField.text.Length >= MinPasswordLength && _passwordField.text.Length <= MaxPasswordLength)
         {
-            _hints.PasswordLengthWrong();
-            return false;
+
+            Debug.LogWarning("Check length");
+            
+            return true;
         }
 
         else
         {
+            _hints.PasswordLengthWrong();
             return true;
         }
     }

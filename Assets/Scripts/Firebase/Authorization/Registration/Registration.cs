@@ -6,6 +6,9 @@ using Firebase;
 using TMPro;
 using UnityEngine.UI;
 using Firebase.Database;
+using Firebase.Extensions;
+using UnityEngine.SceneManagement;
+    
 
 public class Registration : MonoBehaviour
 {
@@ -20,6 +23,7 @@ public class Registration : MonoBehaviour
     private Hints _hints;
 
     private int _startScore = 0;
+    private int _sceneID = 1;
 
     void Start()
     {
@@ -33,17 +37,19 @@ public class Registration : MonoBehaviour
     {
         if (_registrationFields.CheckAuthorization())
         {
-            Debug.LogError("Start coroutine");
-            StartCoroutine(TryRegistrate());
+            Debug.LogWarning("Start coroutine");
+            StartCoroutine(CheckName());
         }
             
     }
 
-    private IEnumerator CheckRegistration(string email, string password)
+    private IEnumerator TryRegistration(string email, string password)
     {
         var auth = AuthorizationManager.Instance.Auth;
 
-        var registrationTask = auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task => {
+
+        var registrationTask = auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task =>
+        {
             if (task.IsCanceled)
             {
                 Debug.LogError("CreateUserWithEmailAndPasswordAsync was canceled.");
@@ -61,29 +67,30 @@ public class Registration : MonoBehaviour
                 result.User.DisplayName, result.User.UserId);*/
 
         });
+        yield return new WaitUntil(predicate: () => registrationTask.IsCompleted);
 
-        if (AuthorizationManager.Instance == null)
-            Debug.LogError("Instance is null");
+        
 
-        if (AuthorizationManager.Instance.Auth == null)
-            Debug.LogError("Auth is null");
+        AddUserDataToDatabase();
+        EnterMenuScene();
+    }
 
-        if (AuthorizationManager.Instance.Auth.CurrentUser == null)
-            Debug.LogError("Current user is null");
-
-        if (AuthorizationManager.Instance.Auth.CurrentUser.UserId == null)
-            Debug.LogError("UserId is null");
-
+    private void AddUserDataToDatabase()
+    {
         string userId = AuthorizationManager.Instance.Auth.CurrentUser.UserId;
         _userInDatabase.WriteNewUser(userId);
         _userInDatabase.WriteName(userId, _nameField.text);
         _userInDatabase.WriteScore(userId, _startScore);
-
-        yield return new WaitUntil(predicate: () => registrationTask.IsCompleted);
     }
 
-    private IEnumerator TryRegistrate()
+    private void EnterMenuScene()
     {
+        SceneManager.LoadScene(_sceneID);
+    }
+
+    private IEnumerator CheckName()
+    {
+
         if (DatabaseManager.Instance.Reference == null)
         {
             Debug.LogError("DatabaseError is null");
@@ -99,18 +106,21 @@ public class Registration : MonoBehaviour
         else
         {
             DataSnapshot snapshot = task.Result;
+            bool canRegister = true;
 
             foreach (var item in snapshot.Children)
             {
                 if (_nameField.text == item.Child("name").Value.ToString())
                 {
+                    canRegister = false;
                     _hints.NameExists();
                     yield return null;
                 }
 
             }
 
-            StartCoroutine(CheckRegistration(_emailField.text, _passwordField.text));
+            if(canRegister)
+                StartCoroutine(TryRegistration(_emailField.text, _passwordField.text));
 
 
         }

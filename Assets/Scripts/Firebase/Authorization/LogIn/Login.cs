@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Login : MonoBehaviour
 {
@@ -11,6 +12,18 @@ public class Login : MonoBehaviour
     [SerializeField] private Button _logInButton;
     
     private Hints _hints;
+    private int _sceneID = 1;
+    private int _silentAuthId = 0;
+
+    private void Awake()
+    {
+        int silentId = PlayerPrefs.GetInt("Silent");
+
+        if (silentId == _silentAuthId)
+        {
+            EnterMenuScene();
+        }
+    }
 
     void Start()
     {
@@ -37,6 +50,7 @@ public class Login : MonoBehaviour
             if (task.IsFaulted)
             {
                 Debug.LogError("SignInWithEmailAndPasswordAsync encountered an error: " + task.Exception);
+                _hints.EmailOrPasswordWrong();
                 return;
             }
             /*
@@ -48,5 +62,17 @@ public class Login : MonoBehaviour
         });
 
         yield return new WaitUntil(predicate: () => logInTask.IsCompleted);
+        EnterMenuScene();
+        EnableSilentAuthentification();
+    }
+
+    private void EnterMenuScene()
+    {
+        SceneManager.LoadScene(_sceneID);
+    }
+
+    private void EnableSilentAuthentification()
+    {
+        PlayerPrefs.SetInt("Silent", _silentAuthId);
     }
 }

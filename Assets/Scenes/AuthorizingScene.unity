@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 28973144}
   - component: {fileID: 28973143}
-  - component: {fileID: 28973142}
   m_Layer: 0
   m_Name: DatabaseManager
   m_TagString: Untagged
@@ -141,18 +140,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &28973142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 28973141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc6d051ecfad80b47abd278198d91e42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &28973143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1763,8 +1750,8 @@ MonoBehaviour:
   m_VerticalScrollbarEventHandler: {fileID: 0}
   m_LayoutGroup: {fileID: 0}
   m_ScrollSensitivity: 1
-  m_ContentType: 0
-  m_InputType: 0
+  m_ContentType: 7
+  m_InputType: 2
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
@@ -3607,7 +3594,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1134226820}
   - component: {fileID: 1134226819}
-  - component: {fileID: 1134226818}
   m_Layer: 0
   m_Name: LogInScripts
   m_TagString: Untagged
@@ -3615,18 +3601,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1134226818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1134226817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42195dca10d94b84b921c4cfeb5ce5ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1134226819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4595,6 +4569,7 @@ GameObject:
   - component: {fileID: 1358850263}
   - component: {fileID: 1358850262}
   - component: {fileID: 1358850264}
+  - component: {fileID: 1358850265}
   m_Layer: 0
   m_Name: SignInScripts
   m_TagString: Untagged
@@ -4666,6 +4641,18 @@ MonoBehaviour:
   _wrongEmailPanel: {fileID: 285154533}
   _wrongLengthPasswordPanel: {fileID: 707057568}
   _wrongEmailOrPasswordPanel: {fileID: 725583060}
+--- !u!114 &1358850265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358850259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc6d051ecfad80b47abd278198d91e42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1360173172
 GameObject:
   m_ObjectHideFlags: 0
@@ -5880,14 +5867,14 @@ MonoBehaviour:
   m_VerticalScrollbarEventHandler: {fileID: 0}
   m_LayoutGroup: {fileID: 0}
   m_ScrollSensitivity: 1
-  m_ContentType: 0
+  m_ContentType: 6
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 0
+  m_KeyboardType: 7
   m_LineType: 0
   m_HideMobileInput: 0
   m_HideSoftKeyboard: 0
-  m_CharacterValidation: 0
+  m_CharacterValidation: 7
   m_RegexValue: 
   m_GlobalPointSize: 14
   m_CharacterLimit: 0
