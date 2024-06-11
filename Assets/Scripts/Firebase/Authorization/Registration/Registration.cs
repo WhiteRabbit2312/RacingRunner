@@ -31,8 +31,12 @@ public class Registration : MonoBehaviour
 
     private void HandRegistrationStateClicked()
     {
-        if(_registrationFields.CheckAuthorization())
+        if (_registrationFields.CheckAuthorization())
+        {
+            Debug.LogError("Start coroutine");
             StartCoroutine(TryRegistrate());
+        }
+            
     }
 
     private IEnumerator CheckRegistration(string email, string password)
@@ -57,6 +61,18 @@ public class Registration : MonoBehaviour
                 result.User.DisplayName, result.User.UserId);*/
 
         });
+
+        if (AuthorizationManager.Instance == null)
+            Debug.LogError("Instance is null");
+
+        if (AuthorizationManager.Instance.Auth == null)
+            Debug.LogError("Auth is null");
+
+        if (AuthorizationManager.Instance.Auth.CurrentUser == null)
+            Debug.LogError("Current user is null");
+
+        if (AuthorizationManager.Instance.Auth.CurrentUser.UserId == null)
+            Debug.LogError("UserId is null");
 
         string userId = AuthorizationManager.Instance.Auth.CurrentUser.UserId;
         _userInDatabase.WriteNewUser(userId);

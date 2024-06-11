@@ -20,21 +20,23 @@ public class AuthorizationManager : MonoBehaviour
 
     public FirebaseAuth Auth
     {
-        get;
-        set;
+        get
+        {
+            return _auth;
+        }
+        
     }
 
     private void Awake()
     {
-        _auth = FirebaseAuth.DefaultInstance;
-
-        Auth = _auth;
 
         if (_instance == null)
         {
             _instance = this;
 
         }
+
+        _auth = FirebaseAuth.DefaultInstance;
 
     }
 
