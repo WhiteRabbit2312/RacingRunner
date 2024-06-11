@@ -26,6 +26,7 @@ public class Registration : MonoBehaviour
         _registrationButton.onClick.AddListener(HandRegistrationStateClicked);
         _hints = GetComponent<Hints>();
         _userInDatabase = GetComponent<UserInDatabase>();
+        _registrationFields = GetComponent<RegistrationFields>();
     }
 
     private void HandRegistrationStateClicked()
@@ -67,8 +68,12 @@ public class Registration : MonoBehaviour
 
     private IEnumerator TryRegistrate()
     {
-        var task = DatabaseManager.Instance.Reference.Child("User").GetValueAsync();
+        if (DatabaseManager.Instance.Reference == null)
+        {
+            Debug.LogError("DatabaseError is null");
+        }
 
+        var task = DatabaseManager.Instance.Reference.Child("User").GetValueAsync();
         yield return new WaitUntil(() => task.IsCompleted);
 
         if (task.IsFaulted || task.IsCanceled)

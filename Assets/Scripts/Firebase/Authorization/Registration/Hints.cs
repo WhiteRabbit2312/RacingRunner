@@ -35,4 +35,8 @@ public class Hints : MonoBehaviour
         _wrongEmailOrPasswordPanel.SetActive(true);
     }
 
+    public void CloseHint(GameObject panel)
+    {
+        panel.SetActive(false);
+    }
 }
