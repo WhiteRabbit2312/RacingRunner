@@ -17,7 +17,7 @@ public class Login : MonoBehaviour
 
     private void Awake()
     {
-        int silentId = PlayerPrefs.GetInt("Silent");
+        int silentId = PlayerPrefs.GetInt(DatabaseConstants.SilentAuthTag);
 
         if (silentId == _silentAuthId)
         {
@@ -73,6 +73,6 @@ public class Login : MonoBehaviour
 
     private void EnableSilentAuthentification()
     {
-        PlayerPrefs.SetInt("Silent", _silentAuthId);
+        PlayerPrefs.SetInt(DatabaseConstants.SilentAuthTag, _silentAuthId);
     }
 }

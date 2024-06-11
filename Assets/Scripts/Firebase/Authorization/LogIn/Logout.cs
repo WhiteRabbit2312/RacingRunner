@@ -10,7 +10,7 @@ public class Logout : MonoBehaviour
     public void LogoutButton()
     {
         FirebaseAuth.DefaultInstance.SignOut();
-        PlayerPrefs.SetInt("Silent", _logoutIdx);
+        PlayerPrefs.SetInt(DatabaseConstants.SilentAuthTag, _logoutIdx);
         SceneManager.LoadScene(_sceneIdx);
     }
 }

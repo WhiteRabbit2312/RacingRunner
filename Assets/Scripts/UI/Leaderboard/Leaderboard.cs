@@ -5,12 +5,14 @@ using Firebase.Auth;
 using Firebase;
 using Firebase.Database;
 using System.Linq;
+using UnityEngine.UI;
 
 public class Leaderboard : MonoBehaviour
 {
     [SerializeField] private Item _prefab;
-    private GameObject[] _itemOnScene;
-    private GameObject _rowPosition;
+    [SerializeField] private GameObject _rowPosition;
+
+    private List<Item> _itemOnScene = new List<Item>();
 
     public void LeaderboardButton()
     {
@@ -19,7 +21,7 @@ public class Leaderboard : MonoBehaviour
 
     private IEnumerator GetUserHighscoreCoroutine()
     {
-        var task = DatabaseManager.Instance.Reference.Child("User").GetValueAsync();
+        var task = DatabaseManager.Instance.Reference.Child(DatabaseConstants.UserTag).GetValueAsync();
 
         yield return new WaitUntil(() => task.IsCompleted);
 
@@ -34,13 +36,14 @@ public class Leaderboard : MonoBehaviour
 
             foreach (var item in snapshot.Children)
             {
-                if (!item.HasChild("score"))
+                if (!item.HasChild(DatabaseConstants.TimeTag))
                     continue;
 
                 Row newRow = new Row();
-                newRow.Name = item.Child("name").Value.ToString();
-                newRow.Score = int.Parse(item.Child("score").Value.ToString());
+                newRow.Name = item.Child(DatabaseConstants.NameTag).Value.ToString();
+                newRow.Score = int.Parse(item.Child(DatabaseConstants.TimeTag).Value.ToString());
                 rows.Add(newRow);
+                
             }
 
             ClearLeaderBoard();
@@ -62,7 +65,7 @@ public class Leaderboard : MonoBehaviour
         for (int i = 0; i < rowsToSort.Count; ++i)
         {
             Item row = Instantiate(_prefab, _rowPosition.transform);
-
+            _itemOnScene.Add(row);
             row.PlaceText.text = placeCount.ToString();
             row.NameText.text = rowsToSortNew[i].Name;
 
@@ -75,7 +78,7 @@ public class Leaderboard : MonoBehaviour
     {
         foreach (var item in _itemOnScene)
         {
-            Destroy(item);
+            Destroy(item.gameObject);
         }
     }
 }

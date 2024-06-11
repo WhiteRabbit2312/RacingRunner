@@ -18,18 +18,18 @@ public class Registration : MonoBehaviour
 
     [SerializeField] private Button _registrationButton;
 
-    private UserInDatabase _userInDatabase;
+    private SetUserData _userInDatabase;
     private RegistrationFields _registrationFields;
     private Hints _hints;
 
-    private int _startScore = 0;
+    private int _startTime = 0;
     private int _sceneID = 1;
 
     void Start()
     {
         _registrationButton.onClick.AddListener(HandRegistrationStateClicked);
         _hints = GetComponent<Hints>();
-        _userInDatabase = GetComponent<UserInDatabase>();
+        _userInDatabase = GetComponent<SetUserData>();
         _registrationFields = GetComponent<RegistrationFields>();
     }
 
@@ -80,7 +80,7 @@ public class Registration : MonoBehaviour
         string userId = AuthorizationManager.Instance.Auth.CurrentUser.UserId;
         _userInDatabase.WriteNewUser(userId);
         _userInDatabase.WriteName(userId, _nameField.text);
-        _userInDatabase.WriteScore(userId, _startScore);
+        _userInDatabase.WriteScore(userId, _startTime);
     }
 
     private void EnterMenuScene()
@@ -96,7 +96,7 @@ public class Registration : MonoBehaviour
             Debug.LogError("DatabaseError is null");
         }
 
-        var task = DatabaseManager.Instance.Reference.Child("User").GetValueAsync();
+        var task = DatabaseManager.Instance.Reference.Child(DatabaseConstants.UserTag).GetValueAsync();
         yield return new WaitUntil(() => task.IsCompleted);
 
         if (task.IsFaulted || task.IsCanceled)
@@ -110,7 +110,7 @@ public class Registration : MonoBehaviour
 
             foreach (var item in snapshot.Children)
             {
-                if (_nameField.text == item.Child("name").Value.ToString())
+                if (_nameField.text == item.Child(DatabaseConstants.NameTag).Value.ToString())
                 {
                     canRegister = false;
                     _hints.NameExists();
