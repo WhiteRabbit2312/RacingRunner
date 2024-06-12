@@ -22,8 +22,7 @@ public class Registration : MonoBehaviour
     private RegistrationFields _registrationFields;
     private Hints _hints;
 
-    private int _startTime = 0;
-    private int _sceneID = 1;
+    private readonly int _startPlayerTime = 0;
 
     void Start()
     {
@@ -80,12 +79,12 @@ public class Registration : MonoBehaviour
         string userId = AuthorizationManager.Instance.UserID;
         _userInDatabase.WriteNewUser(userId);
         _userInDatabase.WriteName(userId, _nameField.text);
-        _userInDatabase.WriteScore(userId, _startTime);
+        _userInDatabase.WriteScore(userId, _startPlayerTime);
     }
 
     private void EnterMenuScene()
     {
-        SceneManager.LoadScene(_sceneID);
+        SceneManager.LoadScene(DatabaseConstants.MenuSceneID);
     }
 
     private IEnumerator CheckName()

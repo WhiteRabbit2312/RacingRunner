@@ -18,7 +18,6 @@ namespace RacingRunner
         public int Time;
         
         private int _timer = 0;
-        private const int SecondsToDiv = 60;
 
         private void Update()
         {
@@ -26,18 +25,14 @@ namespace RacingRunner
             _speedText.text = Speed.ToString();
             _timer++;
             Time = _timer;
+
+            Debug.LogError("Speed: " + Speed);
         }
 
         private string CreateTimer()
         {
-            string timer = (_timer / SecondsToDiv).ToString() + " : " + (_timer % SecondsToDiv);
+            string timer = (_timer / GameplayConstants.TickPerSecond).ToString() + " : " + (_timer % GameplayConstants.TickPerSecond);
             return timer;
-        }
-
-        public override void FixedUpdateNetwork()
-        {
-
-            Debug.LogError("Speed: " + Speed);
         }
     }
 }

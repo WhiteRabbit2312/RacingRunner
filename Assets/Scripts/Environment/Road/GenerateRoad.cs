@@ -15,6 +15,10 @@ namespace RacingRunner
         [SerializeField] private NetworkObject _emptyPrefab;
         [SerializeField] private NetworkObject _finishPrefab;
 
+        [Space]
+
+        [SerializeField] private int _emptyChunkCount;
+
         [SerializeField] private int _testChunk;
 
         [Networked] int _chunkId { get; set; }
@@ -23,7 +27,7 @@ namespace RacingRunner
 
         [SerializeField] private int _roadLength;
         private List<ChunkFactory> _obstaclesList = new List<ChunkFactory>();
-        [SerializeField] private int _emptyChunkCount;
+        
 
         public override void Spawned()
         {

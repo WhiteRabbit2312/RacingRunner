@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class Logout : MonoBehaviour
 {
-    private int _logoutIdx = 1;
-    private int _sceneIdx = 0;
-
     public void LogoutButton()
     {
         FirebaseAuth.DefaultInstance.SignOut();
-        PlayerPrefs.SetInt(DatabaseConstants.SilentAuthTag, _logoutIdx);
-        SceneManager.LoadScene(_sceneIdx);
+        PlayerPrefs.SetInt(DatabaseConstants.SilentAuthTag, DatabaseConstants.LogoutId);
+        SceneManager.LoadScene(DatabaseConstants.AuthScene);
     }
 }

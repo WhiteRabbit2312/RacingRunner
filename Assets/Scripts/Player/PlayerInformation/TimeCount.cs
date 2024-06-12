@@ -7,6 +7,7 @@ namespace RacingRunner
 {
     public class TimeCount : MonoBehaviour
     {
+        /*
         [SerializeField] private TextMeshProUGUI _timeText;
         private int _timer = 0;
         private const int SecondsToDiv = 60;
@@ -21,6 +22,6 @@ namespace RacingRunner
         {
             string timer = (_timer / SecondsToDiv).ToString() + " : " + (_timer % SecondsToDiv);
             return timer;
-        }
+        }*/
     }
 }

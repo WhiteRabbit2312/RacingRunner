@@ -18,8 +18,7 @@ public class RegistrationFields : MonoBehaviour
    + @"([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
    + @"([a-zA-Z]+[\w-]+\.)+[a-zA-Z]{2,4})$";
 
-    private const int MinPasswordLength = 6;
-    private const int MaxPasswordLength = 15;
+    
 
     private void Awake()
     {
@@ -79,7 +78,8 @@ public class RegistrationFields : MonoBehaviour
     private bool CheckPasswordLength()
     {
         
-        if (_passwordField.text.Length >= MinPasswordLength && _passwordField.text.Length <= MaxPasswordLength)
+        if (_passwordField.text.Length >= DatabaseConstants.MinPasswordLength 
+            && _passwordField.text.Length <= DatabaseConstants.MaxPasswordLength)
         {
 
             Debug.LogWarning("Check length");

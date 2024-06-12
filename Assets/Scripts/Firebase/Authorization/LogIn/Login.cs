@@ -12,14 +12,13 @@ public class Login : MonoBehaviour
     [SerializeField] private Button _logInButton;
     
     private Hints _hints;
-    
-    private int _silentAuthId = 0;
+
 
     private void Awake()
     {
         int silentId = PlayerPrefs.GetInt(DatabaseConstants.SilentAuthTag);
 
-        if (silentId == _silentAuthId)
+        if (silentId == DatabaseConstants.SilentAuthId)
         {
             EnterMenuScene();
         }
@@ -68,6 +67,6 @@ public class Login : MonoBehaviour
 
     private void EnableSilentAuthentification()
     {
-        PlayerPrefs.SetInt(DatabaseConstants.SilentAuthTag, _silentAuthId);
+        PlayerPrefs.SetInt(DatabaseConstants.SilentAuthTag, DatabaseConstants.SilentAuthId);
     }
 }

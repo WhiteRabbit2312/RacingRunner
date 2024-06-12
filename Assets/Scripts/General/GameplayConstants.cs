@@ -10,5 +10,6 @@ namespace RacingRunner
         public const int RequiredPlayerAmount = 2;
         public const int ChunkChildIdx = 0;
         public const int FirstChunkID = 0;
+
     }
 }

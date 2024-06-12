@@ -8,6 +8,7 @@ namespace RacingRunner
     public class SpilledOil : Chunk
     {
         private float _tempSpeed;
+        private readonly float _effectDurration = 5f;
 
         public override void DetectHit()
         {
@@ -31,7 +32,7 @@ namespace RacingRunner
 
         private IEnumerator Timer()
         {
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(_effectDurration);
         }
     }
 }
