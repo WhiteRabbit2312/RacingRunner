@@ -27,6 +27,16 @@ public class AuthorizationManager : MonoBehaviour
         
     }
 
+    private string _userID;
+
+    public string UserID
+    {
+        get
+        {
+            return _userID;
+        }
+    }
+
     private void Awake()
     {
 
@@ -37,6 +47,7 @@ public class AuthorizationManager : MonoBehaviour
         }
 
         _auth = FirebaseAuth.DefaultInstance;
+        _userID = _auth.CurrentUser.UserId;
 
     }
 

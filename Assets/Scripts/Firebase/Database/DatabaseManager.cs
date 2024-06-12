@@ -15,13 +15,13 @@ public class DatabaseManager : MonoBehaviour
         }
     }
 
-    private DatabaseReference reference;
+    private DatabaseReference _reference;
 
     public DatabaseReference Reference
     {
         get
         {
-            return reference;
+            return _reference;
         }
 
 
@@ -31,7 +31,7 @@ public class DatabaseManager : MonoBehaviour
     {
         DontDestroyOnLoad(this);
 
-        reference = FirebaseDatabase.DefaultInstance.RootReference;
+        _reference = FirebaseDatabase.DefaultInstance.RootReference;
 
         if (_instance == null)
         {

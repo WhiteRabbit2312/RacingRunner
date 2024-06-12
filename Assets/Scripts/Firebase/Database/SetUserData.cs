@@ -19,6 +19,10 @@ public class SetUserData : MonoBehaviour
     public void WriteName(string userId, string name)
     {
         DatabaseManager.Instance.Reference.Child(DatabaseConstants.UserTag).Child(userId).Child(DatabaseConstants.NameTag).SetValueAsync(name);
+    }
 
+    public void WriteAvatar(string userId, int avatarIdx)
+    {
+        DatabaseManager.Instance.Reference.Child(DatabaseConstants.UserTag).Child(userId).Child(DatabaseConstants.AvatarTag).SetValueAsync(avatarIdx);
     }
 }

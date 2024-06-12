@@ -77,7 +77,7 @@ public class Registration : MonoBehaviour
 
     private void AddUserDataToDatabase()
     {
-        string userId = AuthorizationManager.Instance.Auth.CurrentUser.UserId;
+        string userId = AuthorizationManager.Instance.UserID;
         _userInDatabase.WriteNewUser(userId);
         _userInDatabase.WriteName(userId, _nameField.text);
         _userInDatabase.WriteScore(userId, _startTime);
