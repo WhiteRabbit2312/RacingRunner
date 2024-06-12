@@ -13,7 +13,7 @@ namespace RacingRunner
 
         protected PlayerInfo MyPlayerInfo;
 
-        private const int ChildIdx = 0;
+        
         public override void FixedUpdateNetwork()
         {
             Debug.LogError("Chunk");
@@ -45,7 +45,7 @@ namespace RacingRunner
 
         public virtual void DestroyItem()
         {
-            Transform netObj = Object.transform.GetChild(ChildIdx);
+            Transform netObj = Object.transform.GetChild(GameplayConstants.ChunkChildIdx);
             Destroy(netObj.gameObject);
         }
     }

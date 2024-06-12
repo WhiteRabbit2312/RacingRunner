@@ -14,11 +14,11 @@ namespace RacingRunner
         [SerializeField] private Button _connectButton;
 
         public static BasicSpawner Instance;
+        public List<NetworkObject> PlayersOnScene = new List<NetworkObject>();
+        [HideInInspector] public NetworkRunner NetRunner;
 
         private int _scene = 2;
         private string _sessionName = "TestRoom";
-        public List<NetworkObject> PlayersOnScene = new List<NetworkObject>();
-        [HideInInspector] public NetworkRunner NetRunner;
 
         private void Awake()
         {
@@ -58,7 +58,8 @@ namespace RacingRunner
         {
             if (player == Runner.LocalPlayer)
             {
-                Runner.Spawn(_playerPrefab, _spawnPoint, Quaternion.identity);
+                NetworkObject spawnedPlayer = Runner.Spawn(_playerPrefab, _spawnPoint, Quaternion.identity);
+                PlayersOnScene.Add(spawnedPlayer);
             }
         }
     }

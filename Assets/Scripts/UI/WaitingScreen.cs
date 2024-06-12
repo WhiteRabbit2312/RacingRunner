@@ -2,17 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaitingScreen : MonoBehaviour
+namespace RacingRunner 
 {
-    // Start is called before the first frame update
-    void Start()
+    public class WaitingScreen : MonoBehaviour
     {
+        [SerializeField] private GameObject _waitingPanel;
+        [SerializeField] private GameObject _countDownPanel;
         
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void Update()
+        {
+            if(BasicSpawner.Instance.PlayersOnScene.Count == GameplayConstants.RequiredPlayerAmount)
+            {
+                _waitingPanel.SetActive(false);
+                _countDownPanel.SetActive(true);
+            }
+            
+        }
     }
 }

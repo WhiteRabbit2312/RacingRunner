@@ -5,4 +5,6 @@ public class DatabaseConstants
     public const string NameTag = "name";
     public const string SilentAuthTag = "Silent";
     public const string AvatarTag = "avatar";
+
+    public const int MenuSceneID = 1;
 }

@@ -6,6 +6,11 @@ using Firebase;
 
 public class SetUserData : MonoBehaviour
 {
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
+
     public void WriteNewUser(string userId)
     {
         DatabaseManager.Instance.Reference.Child(DatabaseConstants.UserTag).Child(userId);

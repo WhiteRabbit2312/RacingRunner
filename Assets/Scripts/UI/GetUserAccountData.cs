@@ -6,7 +6,7 @@ using Fusion;
 using Firebase.Database;
 using TMPro;
 
-public class SetUserAccountData : NetworkBehaviour
+public class GetUserAccountData : NetworkBehaviour
 {
     [SerializeField] private Image _avatarImg;
     [SerializeField] private Sprite[] _avatarSprites;

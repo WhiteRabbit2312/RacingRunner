@@ -3,21 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class TimeCount : MonoBehaviour
+namespace RacingRunner 
 {
-    [SerializeField] private TextMeshProUGUI _timeText;
-    private int _timer = 0;
-    private const int SecondsToDiv = 60;
-
-    private void Update()
+    public class TimeCount : MonoBehaviour
     {
-        _timeText.text = CreateTimer();
-        _timer++;
-    }
+        [SerializeField] private TextMeshProUGUI _timeText;
+        private int _timer = 0;
+        private const int SecondsToDiv = 60;
 
-    private string CreateTimer()
-    {
-        string timer = (_timer / SecondsToDiv).ToString() + " : " + (_timer % SecondsToDiv);
-        return timer;
+        private void Update()
+        {
+            _timeText.text = CreateTimer();
+            _timer++;
+        }
+
+        private string CreateTimer()
+        {
+            string timer = (_timer / SecondsToDiv).ToString() + " : " + (_timer % SecondsToDiv);
+            return timer;
+        }
     }
 }

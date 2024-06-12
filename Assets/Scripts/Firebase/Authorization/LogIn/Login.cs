@@ -12,7 +12,7 @@ public class Login : MonoBehaviour
     [SerializeField] private Button _logInButton;
     
     private Hints _hints;
-    private int _sceneID = 1;
+    
     private int _silentAuthId = 0;
 
     private void Awake()
@@ -53,11 +53,6 @@ public class Login : MonoBehaviour
                 _hints.EmailOrPasswordWrong();
                 return;
             }
-            /*
-            Firebase.Auth.AuthResult result = task.Result;
-            Debug.LogFormat("User signed in successfully: {0} ({1})",
-                result.User.DisplayName, result.User.UserId);*/
-
 
         });
 
@@ -68,7 +63,7 @@ public class Login : MonoBehaviour
 
     private void EnterMenuScene()
     {
-        SceneManager.LoadScene(_sceneID);
+        SceneManager.LoadScene(DatabaseConstants.MenuSceneID);
     }
 
     private void EnableSilentAuthentification()
