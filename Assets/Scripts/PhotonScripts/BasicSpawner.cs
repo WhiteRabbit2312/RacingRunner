@@ -16,8 +16,7 @@ namespace RacingRunner
         public static BasicSpawner Instance;
         public List<NetworkObject> PlayersOnScene = new List<NetworkObject>();
         [HideInInspector] public NetworkRunner NetRunner;
-
-        private int _scene = 2;
+        
         private string _sessionName = "TestRoom";
 
         private void Awake()
@@ -44,7 +43,7 @@ namespace RacingRunner
             {
                 GameMode = mode,
                 SessionName = _sessionName,
-                Scene = SceneRef.FromIndex(_scene),
+                Scene = SceneRef.FromIndex(DatabaseConstants.GameScene),
                 SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>()
             });
         }

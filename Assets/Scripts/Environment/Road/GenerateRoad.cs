@@ -27,7 +27,7 @@ namespace RacingRunner
 
         [SerializeField] private int _roadLength;
         private List<ChunkFactory> _obstaclesList = new List<ChunkFactory>();
-        
+        private ChunkFactory _lastChunk;
 
         public override void Spawned()
         {
@@ -36,7 +36,7 @@ namespace RacingRunner
             _obstaclesList.Add(new HatchFactory(_hatchPrefab));
             _obstaclesList.Add(new SpilledOilFactory(_spilledOilCarPrefab));
             _obstaclesList.Add(new NitroFactory(_nitroPrefab));
-            _obstaclesList.Add(new FinishFactory(_nitroPrefab));
+            _lastChunk = new FinishFactory(_finishPrefab);
             
             GenerateMap();
         }
@@ -56,6 +56,7 @@ namespace RacingRunner
                 _obstaclesList[_chunkId].CreateChunk(step * i);
             }
         }
+
         private void SpawnRandomChunks()
         {
             for (int i = _emptyChunkCount; i < _roadLength; ++i)
@@ -68,8 +69,10 @@ namespace RacingRunner
 
         private void SpawnFinishChunk()
         {
+            Debug.LogError("Spawn finish chunk");
             float stepForLastChunk = GenerationStep();
-            _obstaclesList.Last().CreateChunk(_roadLength * stepForLastChunk);
+            NetworkObject no = _lastChunk.CreateChunk(_roadLength * stepForLastChunk);
+            Debug.LogError("obstacle: " + no);
         }
 
         private int ChunkId()

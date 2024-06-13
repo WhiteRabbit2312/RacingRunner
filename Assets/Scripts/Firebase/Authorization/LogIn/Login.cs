@@ -16,16 +16,18 @@ public class Login : MonoBehaviour
 
     private void Awake()
     {
+        
+    }
+
+    void Start()
+    {
         int silentId = PlayerPrefs.GetInt(DatabaseConstants.SilentAuthTag);
 
         if (silentId == DatabaseConstants.SilentAuthId)
         {
             EnterMenuScene();
         }
-    }
 
-    void Start()
-    {
         _hints = GetComponent<Hints>();
         _logInButton.onClick.AddListener(HandRegistrationStateClicked);
     }

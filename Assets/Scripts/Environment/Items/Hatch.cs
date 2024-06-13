@@ -23,6 +23,7 @@ namespace RacingRunner
             if (MyPlayerInfo != null)
             {
                 NetworkTransform netObjPlayer = MyPlayerInfo.Object.GetComponent<NetworkTransform>();
+                Debug.LogError("netObjPlayer: " + netObjPlayer.ToString());
                 DiscardCar(ref netObjPlayer);
                 Effect(ref MyPlayerInfo.Speed);
                 DestroyItem();

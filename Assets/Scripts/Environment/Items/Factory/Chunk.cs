@@ -12,7 +12,6 @@ namespace RacingRunner
         [SerializeField] protected float ChangeStat;
 
         protected PlayerInfo MyPlayerInfo;
-
         
         public override void FixedUpdateNetwork()
         {

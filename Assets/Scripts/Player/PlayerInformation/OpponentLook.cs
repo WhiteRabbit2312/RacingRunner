@@ -7,10 +7,10 @@ public class OpponentLook : NetworkBehaviour
 {
     public override void Spawned()
     {
-        if (!HasInputAuthority)
+        if (!HasStateAuthority)
         {
             BoxCollider playerCollider = GetComponent<BoxCollider>();
-            playerCollider.gameObject.SetActive(false);
+            playerCollider.enabled = false;
         }
     }
 }

@@ -274,7 +274,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   Radius: 0.7
-  ChangeStat: 2
+  ChangeStat: 10
 --- !u!114 &8676423647602353285
 MonoBehaviour:
   m_ObjectHideFlags: 0

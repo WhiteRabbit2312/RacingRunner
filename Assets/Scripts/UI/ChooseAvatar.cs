@@ -23,7 +23,7 @@ public class ChooseAvatar : MonoBehaviour
 
     public void SetAvatar()
     {
-        string userId = AuthorizationManager.Instance.UserID;
+        string userId = AuthorizationManager.Instance.Auth.CurrentUser.UserId;
         _setUserData.WriteAvatar(userId, _avatarIdx);
 
         _avatarImg.sprite = _avatarSprites[_avatarIdx];

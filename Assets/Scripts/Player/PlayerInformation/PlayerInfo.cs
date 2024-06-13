@@ -4,7 +4,6 @@ using UnityEngine;
 using Fusion;
 using TMPro;
 
-
 namespace RacingRunner
 {
     public class PlayerInfo : NetworkBehaviour
@@ -16,13 +15,23 @@ namespace RacingRunner
         public float Speed;
         public float Nitro;
         public int Time;
-        
+
+        private PlayerMovement _playerMovement;
         private int _timer = 0;
+
+        public override void Spawned()
+        {
+            _playerMovement = GetComponent<PlayerMovement>();
+        }
 
         private void Update()
         {
+            if (!_playerMovement.StartRace)
+                return;
+
             _timeText.text = CreateTimer();
             _speedText.text = Speed.ToString();
+            _nitroText.text = Nitro.ToString();
             _timer++;
             Time = _timer;
 

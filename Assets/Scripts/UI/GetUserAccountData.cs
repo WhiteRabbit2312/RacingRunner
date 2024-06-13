@@ -11,9 +11,13 @@ public class GetUserAccountData : NetworkBehaviour
     [SerializeField] private Image _avatarImg;
     [SerializeField] private Sprite[] _avatarSprites;
     [SerializeField] private TextMeshProUGUI _nameText;
+    [SerializeField] private GameObject _countDownPanel;
+
+    private readonly float _showUsersTime = 5f;
 
     public override void Spawned()
     {
+        StartCoroutine(ShowUsers());
         StartCoroutine(GetUserAvatarCoroutine());
         StartCoroutine(GetUserNameCoroutine());
     }
@@ -42,6 +46,7 @@ public class GetUserAccountData : NetworkBehaviour
         var task = DatabaseManager.Instance.Reference.Child(DatabaseConstants.UserTag).Child(DatabaseConstants.NameTag).GetValueAsync();
 
         yield return new WaitUntil(() => task.IsCompleted);
+
         if (task.IsFaulted || task.IsCanceled)
         {
             Debug.LogError("Error when getting name");
@@ -53,5 +58,12 @@ public class GetUserAccountData : NetworkBehaviour
             _nameText.text = snapshot.Value.ToString();
         }
 
+    }
+
+    private IEnumerator ShowUsers()
+    {
+        yield return new WaitForSeconds(_showUsersTime);
+        _countDownPanel.SetActive(true);
+        gameObject.SetActive(false);
     }
 }

@@ -17,6 +17,20 @@ namespace RacingRunner
         private IMovement _input;
         private PlayerPosition _playerPosition;
 
+        private bool _startRace;
+
+        public bool StartRace
+        {
+            get
+            {
+                return _startRace;
+            }
+            set
+            {
+                _startRace = value;
+            }
+        }
+
         public override void Spawned()
         {
             _playerPosition = PlayerPosition.Center;
@@ -38,6 +52,9 @@ namespace RacingRunner
 
         public override void FixedUpdateNetwork()
         {
+            if (!_startRace)
+                return;
+
             Movement();
         }
 

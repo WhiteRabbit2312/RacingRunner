@@ -9,7 +9,6 @@ using Firebase.Database;
 using Firebase.Extensions;
 using UnityEngine.SceneManagement;
     
-
 public class Registration : MonoBehaviour
 {
     [SerializeField] private TMP_InputField _emailField;
@@ -76,7 +75,7 @@ public class Registration : MonoBehaviour
 
     private void AddUserDataToDatabase()
     {
-        string userId = AuthorizationManager.Instance.UserID;
+        string userId = AuthorizationManager.Instance.Auth.CurrentUser.UserId;
         _userInDatabase.WriteNewUser(userId);
         _userInDatabase.WriteName(userId, _nameField.text);
         _userInDatabase.WriteScore(userId, _startPlayerTime);

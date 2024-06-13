@@ -9,28 +9,35 @@ namespace RacingRunner
     public class TimerBeforeRace : NetworkBehaviour
     {
         [SerializeField] private TextMeshProUGUI _countDownText;
-        private int _timer;
-        private int _seconds = 5;
-
-        public override void Spawned()
-        {
-            _timer = _seconds * GameplayConstants.TickPerSecond;
-        }
+        private int _timer = 300;
 
         public override void FixedUpdateNetwork()
         {
             CloseCountDownPanel(_timer);
 
-            _countDownText.text = $"{_timer / GameplayConstants.TickPerSecond} : {_timer % GameplayConstants.TickPerSecond}"; 
-            _timer--;
+            _countDownText.text = $"{_timer / GameplayConstants.TickPerSecond}";
+
+            _timer = (int)(_timer * Runner.DeltaTime);
         }
 
         private void CloseCountDownPanel(int timer)
         {
-            if(timer == 0)
+            
+            if (timer <= 0)
             {
-                Object.gameObject.SetActive(false);
+                foreach(var item in BasicSpawner.Instance.PlayersOnScene)
+                {
+                    item.GetComponent<PlayerMovement>().StartRace = true;
+                }
+                Debug.LogError("Close");
+                
             }
+
+        }
+
+        public int GetTimerTime()
+        {
+            return _timer;
         }
     }
 }

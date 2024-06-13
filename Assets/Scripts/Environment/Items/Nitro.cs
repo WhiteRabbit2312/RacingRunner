@@ -8,12 +8,10 @@ namespace RacingRunner
 {
     public class Nitro : Chunk
     {
-        [SerializeField] private TextMeshProUGUI _nitroText;
-        [SerializeField] private float _nitroAmount;
         
         public override void Effect(ref float stat)
         {
-            stat += _nitroAmount;
+            stat += ChangeStat;
         }
 
         public override void DetectHit()
@@ -22,7 +20,6 @@ namespace RacingRunner
             if (MyPlayerInfo != null)
             {
                 Effect(ref MyPlayerInfo.Nitro);
-                _nitroText.text = MyPlayerInfo.Nitro.ToString();
                 DestroyItem();
             }
 
