@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Firebase.Auth;
-using Firebase;
 using TMPro;
 using UnityEngine.UI;
 using Firebase.Database;
@@ -79,6 +77,7 @@ public class Registration : MonoBehaviour
         _userInDatabase.WriteNewUser(userId);
         _userInDatabase.WriteName(userId, _nameField.text);
         _userInDatabase.WriteScore(userId, _startPlayerTime);
+        _userInDatabase.WriteAvatar(userId, DatabaseConstants.DefaultAvatarID);
     }
 
     private void EnterMenuScene()

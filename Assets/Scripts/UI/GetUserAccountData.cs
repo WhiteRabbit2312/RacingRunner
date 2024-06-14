@@ -13,10 +13,28 @@ public class GetUserAccountData : NetworkBehaviour
     [SerializeField] private TextMeshProUGUI _nameText;
     [SerializeField] private GameObject _countDownPanel;
 
-    private readonly float _showUsersTime = 5f;
+    [SerializeField] private GameObject _showPlayersPanel;
+    [SerializeField] private GameObject _waitingPanel;
 
-    public override void Spawned()
+    private readonly float _showUsersTime = 5f;
+    private bool _startCountDown = false;
+
+    public bool StartCountDown
     {
+
+        get
+        {
+            return _startCountDown;
+        }
+
+        set { }
+    }
+
+    public void StartGame()
+    {
+        _showPlayersPanel.SetActive(true);
+        _waitingPanel.SetActive(false);
+
         StartCoroutine(ShowUsers());
         StartCoroutine(GetUserAvatarCoroutine());
         StartCoroutine(GetUserNameCoroutine());
@@ -24,8 +42,9 @@ public class GetUserAccountData : NetworkBehaviour
 
     private IEnumerator GetUserAvatarCoroutine()
     {
-        var task = DatabaseManager.Instance.Reference.Child(DatabaseConstants.UserTag).Child(DatabaseConstants.AvatarTag).GetValueAsync();
-
+        Debug.LogError("");
+        string userID = AuthorizationManager.Instance.Auth.CurrentUser.UserId;
+        var task = DatabaseManager.Instance.Reference.Child(DatabaseConstants.UserTag).Child(userID).Child(DatabaseConstants.AvatarTag).GetValueAsync();
 
         yield return new WaitUntil(() => task.IsCompleted);
 
@@ -36,14 +55,17 @@ public class GetUserAccountData : NetworkBehaviour
 
         else
         {
+            Debug.LogError("task: " + task);
             DataSnapshot snapshot = task.Result;
-            int avatarID = (int)snapshot.Value;
-            _avatarImg.sprite = _avatarSprites[avatarID];
+            Debug.LogError("snapshot: " + snapshot);
+            int avatarId = int.Parse(snapshot.Value.ToString());
+            _avatarImg.sprite = _avatarSprites[avatarId];
         }
     }
     private IEnumerator GetUserNameCoroutine()
     {
-        var task = DatabaseManager.Instance.Reference.Child(DatabaseConstants.UserTag).Child(DatabaseConstants.NameTag).GetValueAsync();
+        string userID = AuthorizationManager.Instance.Auth.CurrentUser.UserId;
+        var task = DatabaseManager.Instance.Reference.Child(DatabaseConstants.UserTag).Child(userID).Child(DatabaseConstants.NameTag).GetValueAsync();
 
         yield return new WaitUntil(() => task.IsCompleted);
 
@@ -63,7 +85,8 @@ public class GetUserAccountData : NetworkBehaviour
     private IEnumerator ShowUsers()
     {
         yield return new WaitForSeconds(_showUsersTime);
+        _startCountDown = true;
         _countDownPanel.SetActive(true);
-        gameObject.SetActive(false);
+        _showPlayersPanel.SetActive(false);
     }
 }

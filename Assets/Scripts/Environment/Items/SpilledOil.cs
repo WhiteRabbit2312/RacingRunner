@@ -34,7 +34,7 @@ namespace RacingRunner
             {
                 Effect(ref MyPlayerInfo.Speed);
                 _effectDurration--;
-                Debug.LogError("_effectDurration " + _effectDurration);
+                //Debug.LogError("_effectDurration " + _effectDurration);
             }
 
             else

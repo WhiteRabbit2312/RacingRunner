@@ -20,6 +20,7 @@ namespace RacingRunner
             base.DetectHit();
             _setUserData.WriteScore(AuthorizationManager.Instance.Auth.CurrentUser.UserId, MyPlayerInfo.Time);
             Runner.Spawn(_finalPanelPrefab);
+
             Debug.LogError("Finish");
         }
 

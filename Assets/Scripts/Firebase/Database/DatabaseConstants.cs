@@ -15,4 +15,6 @@ public class DatabaseConstants
 
     public const int MinPasswordLength = 6;
     public const int MaxPasswordLength = 15;
+
+    public const int DefaultAvatarID = 0;
 }

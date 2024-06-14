@@ -27,24 +27,10 @@ public class AuthorizationManager : MonoBehaviour
         
     }
 
-    private FirebaseAuth _userID;
-
-    public FirebaseAuth UserID
-    {
-        get
-        {
-            return _userID;
-        }
-
-        set
-        {
-
-        }
-
-    }
 
     private void Awake()
     {
+        DontDestroyOnLoad(this);
 
         if (_instance == null)
         {
