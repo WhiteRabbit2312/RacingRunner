@@ -18,9 +18,13 @@ namespace RacingRunner
         public override void DetectHit()
         {
             base.DetectHit();
-            _setUserData.WriteScore(AuthorizationManager.Instance.Auth.CurrentUser.UserId, MyPlayerInfo.Time);
-            Runner.Spawn(_finalPanelPrefab);
-
+            if(MyPlayerInfo != null)
+            {
+                _setUserData.WriteScore(AuthorizationManager.Instance.Auth.CurrentUser.UserId, MyPlayerInfo.Time);
+                Runner.Spawn(_finalPanelPrefab);
+                DestroyItem();
+            }
+            
             Debug.LogError("Finish");
         }
 

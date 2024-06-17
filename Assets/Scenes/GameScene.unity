@@ -1306,9 +1306,9 @@ MonoBehaviour:
   _nitroPrefab: {fileID: 3273990435370951788, guid: 6db4143ba61fa9e4e89bf0b984f5734e, type: 3}
   _emptyPrefab: {fileID: 6362002448351758073, guid: 22d52aa4995f1ad4c940eb2ad1d4812e, type: 3}
   _finishPrefab: {fileID: 7095657395644223776, guid: b4bed2ef160d960478f318ee2bbaf819, type: 3}
-  _emptyChunkCount: 0
+  _emptyChunkCount: 5
   _testChunk: 2
-  _roadLength: 50
+  _roadLength: 10
 --- !u!1 &930442425
 GameObject:
   m_ObjectHideFlags: 0

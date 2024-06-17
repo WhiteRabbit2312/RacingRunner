@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1960428867626501153}
   - component: {fileID: 1634952885952320839}
   m_Layer: 5
-  m_Name: Time
+  m_Name: PlayerScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Time: '
+  m_text: 'Score:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 8947774835640967237}
   - component: {fileID: 5457200951670504574}
   m_Layer: 5
-  m_Name: Best time
+  m_Name: Best score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -277,7 +277,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Best time
+  m_text: 'Best score:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -359,6 +359,7 @@ GameObject:
   - component: {fileID: 7369896668917607466}
   - component: {fileID: 8406938485655204205}
   - component: {fileID: -7052720300571023476}
+  - component: {fileID: 2355378891041604979}
   m_Layer: 5
   m_Name: EndGamePanel
   m_TagString: Untagged
@@ -463,9 +464,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SortKey: 1909178743
   ObjectInterest: 1
-  Flags: 1
+  Flags: 262145
   NestedObjects: []
-  NetworkedBehaviours: []
+  NetworkedBehaviours:
+  - {fileID: 2355378891041604979}
+--- !u!114 &2355378891041604979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8766652484335847606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97529d4954c341f48ae279d479c10736, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textBestScore: {fileID: 5457200951670504574}
+  _textPlayerScore: {fileID: 1634952885952320839}
+  _textPlayerPlace: {fileID: 4246316764754140029}
 --- !u!1 &8828193904275481960
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,7 +495,7 @@ GameObject:
   - component: {fileID: 558819452513568353}
   - component: {fileID: 4246316764754140029}
   m_Layer: 5
-  m_Name: Position
+  m_Name: Place
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -531,7 +548,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Position
+  m_text: 'Place:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

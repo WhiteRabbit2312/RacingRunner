@@ -7,78 +7,81 @@ using Firebase.Database;
 using System.Linq;
 using UnityEngine.UI;
 
-public class Leaderboard : MonoBehaviour
+namespace RacingRunner
 {
-    [SerializeField] private Item _prefab;
-    [SerializeField] private GameObject _rowPosition;
-
-    private List<Item> _itemOnScene = new List<Item>();
-
-    public void LeaderboardButton()
+    public class Leaderboard : MonoBehaviour
     {
-        StartCoroutine(GetUserHighscoreCoroutine());
-    }
+        [SerializeField] private Item _prefab;
+        [SerializeField] private GameObject _rowPosition;
 
-    private IEnumerator GetUserHighscoreCoroutine()
-    {
-        var task = DatabaseManager.Instance.Reference.Child(DatabaseConstants.UserTag).GetValueAsync();
+        private List<Item> _itemOnScene = new List<Item>();
 
-        yield return new WaitUntil(() => task.IsCompleted);
-
-        if (task.IsFaulted || task.IsCanceled)
+        public void LeaderboardButton()
         {
-            Debug.LogError("Error when getting highscore");
+            StartCoroutine(GetUserHighscoreCoroutine());
         }
-        else
+
+        private IEnumerator GetUserHighscoreCoroutine()
         {
-            DataSnapshot snapshot = task.Result;
-            List<Row> rows = new List<Row>();
+            var task = DatabaseManager.Instance.Reference.Child(DatabaseConstants.UserTag).GetValueAsync();
 
-            foreach (var item in snapshot.Children)
+            yield return new WaitUntil(() => task.IsCompleted);
+
+            if (task.IsFaulted || task.IsCanceled)
             {
-                if (!item.HasChild(DatabaseConstants.TimeTag))
-                    continue;
+                Debug.LogError("Error when getting highscore");
+            }
+            else
+            {
+                DataSnapshot snapshot = task.Result;
+                List<Row> rows = new List<Row>();
 
-                Row newRow = new Row();
-                newRow.Name = item.Child(DatabaseConstants.NameTag).Value.ToString();
-                newRow.Score = int.Parse(item.Child(DatabaseConstants.TimeTag).Value.ToString());
-                rows.Add(newRow);
-                
+                foreach (var item in snapshot.Children)
+                {
+                    if (!item.HasChild(DatabaseConstants.TimeTag))
+                        continue;
+
+                    Row newRow = new Row();
+                    newRow.Name = item.Child(DatabaseConstants.NameTag).Value.ToString();
+                    newRow.Score = int.Parse(item.Child(DatabaseConstants.TimeTag).Value.ToString());
+                    rows.Add(newRow);
+
+                }
+
+                ClearLeaderBoard();
+                SortRows(rows);
+
             }
 
-            ClearLeaderBoard();
-            SortRows(rows);
-
         }
 
-    }
-
-    private void SortRows(List<Row> rowsToSort)
-    {
-        int placeCount = 1;
-
-        var sortedList = rowsToSort.OrderByDescending(n => n.Score).ToList();
-
-        List<Row> rowsToSortNew = (List<Row>)sortedList;
-
-
-        for (int i = 0; i < rowsToSort.Count; ++i)
+        private void SortRows(List<Row> rowsToSort)
         {
-            Item row = Instantiate(_prefab, _rowPosition.transform);
-            _itemOnScene.Add(row);
-            row.PlaceText.text = placeCount.ToString();
-            row.NameText.text = rowsToSortNew[i].Name;
+            int placeCount = 1;
 
-            row.ScoreText.text = rowsToSortNew[i].Score.ToString();
-            placeCount++;
+            var sortedList = rowsToSort.OrderByDescending(n => n.Score).ToList();
+
+            List<Row> rowsToSortNew = (List<Row>)sortedList;
+
+
+            for (int i = 0; i < rowsToSort.Count; ++i)
+            {
+                Item row = Instantiate(_prefab, _rowPosition.transform);
+                _itemOnScene.Add(row);
+                row.PlaceText.text = placeCount.ToString();
+                row.NameText.text = rowsToSortNew[i].Name;
+
+                row.ScoreText.text = rowsToSortNew[i].Score.ToString();
+                placeCount++;
+            }
         }
-    }
 
-    private void ClearLeaderBoard()
-    {
-        foreach (var item in _itemOnScene)
+        private void ClearLeaderBoard()
         {
-            Destroy(item.gameObject);
+            foreach (var item in _itemOnScene)
+            {
+                Destroy(item.gameObject);
+            }
         }
     }
 }

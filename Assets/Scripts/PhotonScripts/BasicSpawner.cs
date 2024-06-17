@@ -23,6 +23,7 @@ namespace RacingRunner
 
         private void Awake()
         {
+            DontDestroyOnLoad(this);
             Instance = this;
             _connectButton.onClick.AddListener(ConnectButton);
         }
