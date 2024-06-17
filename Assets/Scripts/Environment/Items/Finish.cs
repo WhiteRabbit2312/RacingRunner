@@ -22,6 +22,7 @@ namespace RacingRunner
             {
                 _setUserData.WriteScore(AuthorizationManager.Instance.Auth.CurrentUser.UserId, MyPlayerInfo.Time);
                 Runner.Spawn(_finalPanelPrefab);
+                Runner.Despawn(BasicSpawner.Instance.PlayersOnSceneDict[Object.InputAuthority]);
                 DestroyItem();
             }
             

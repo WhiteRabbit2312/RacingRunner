@@ -5,6 +5,7 @@ using Firebase.Database;
 using TMPro;
 using System.Linq;
 using Fusion;
+using UnityEngine.SceneManagement;
 
 namespace RacingRunner
 {
@@ -42,11 +43,11 @@ namespace RacingRunner
                 place++;
                 if(userId == item.Key)
                 {
-                    _textPlayerPlace.text = place.ToString();
+                    _textPlayerPlace.text = "Place: " + place.ToString();
                 }
             }
 
-            _textBestScore.text = scoreList.First().ToString();
+            _textBestScore.text = "Bast score: " + scoreList.First().ToString();
 
         }
 
@@ -69,12 +70,17 @@ namespace RacingRunner
                 .Time);
             */
             _textPlayerScore.text 
-                = BasicSpawner
+                = "Score: " + BasicSpawner
                 .Instance
                 .PlayersOnSceneDict.First().Value
                 .GetComponent<PlayerInfo>()
                 .Time.ToString();
 
+        }
+
+        public void BackToMenu()
+        {
+            SceneManager.LoadScene(DatabaseConstants.MenuSceneID);
         }
     }
 }

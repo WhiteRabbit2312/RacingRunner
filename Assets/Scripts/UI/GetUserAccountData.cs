@@ -42,7 +42,6 @@ public class GetUserAccountData : NetworkBehaviour
 
     private IEnumerator GetUserAvatarCoroutine()
     {
-        Debug.LogError("");
         string userID = AuthorizationManager.Instance.Auth.CurrentUser.UserId;
         var task = DatabaseManager.Instance.Reference.Child(DatabaseConstants.UserTag).Child(userID).Child(DatabaseConstants.AvatarTag).GetValueAsync();
 

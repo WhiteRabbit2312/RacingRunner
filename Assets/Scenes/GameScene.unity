@@ -1232,7 +1232,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d77a2e37ccf1d3548b6948458a3f0ef6, type: 3}
   - {fileID: 21300000, guid: 30dff9215ed374c42bc5284c870ac976, type: 3}
   - {fileID: 21300000, guid: 5cd3bf8dd47e4dc4a9d5ed9392195953, type: 3}
-  - {fileID: 21300000, guid: a0c0698fc807b3944bda8dd9c23a6e4f, type: 3}
+  - {fileID: 21300000, guid: 9bef39ef8e6fd4d42bccf103609af17e, type: 3}
   _nameText: {fileID: 308360377}
   _countDownPanel: {fileID: 324499597}
   _showPlayersPanel: {fileID: 1887678704}

@@ -10,6 +10,7 @@ namespace RacingRunner
         public const int RequiredPlayerAmount = 1;
         public const int ChunkChildIdx = 0;
         public const int FirstChunkID = 0;
+        public const string CarTag = "CarIdx";
 
     }
 }

@@ -2,7 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Garage : MonoBehaviour
+namespace RacingRunner
 {
-    
+    public class Garage : MonoBehaviour
+    {
+
+
+        public void ChooseCar(int carIdx)
+        {
+            PlayerPrefs.SetInt(GameplayConstants.CarTag, carIdx);
+        }
+    }
 }

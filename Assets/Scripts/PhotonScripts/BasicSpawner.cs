@@ -58,11 +58,11 @@ namespace RacingRunner
 
         public void PlayerJoined(PlayerRef player)
         {
+            Debug.LogError("Player joined");
             if (player == Runner.LocalPlayer)
             {
                 NetworkObject spawnedPlayer = Runner.Spawn(_playerPrefab, _spawnPoint, Quaternion.identity);
 
-                
                 PlayersOnSceneDict.Add(player, spawnedPlayer);
             }
         }

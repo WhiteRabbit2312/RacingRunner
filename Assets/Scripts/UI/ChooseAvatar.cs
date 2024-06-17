@@ -6,8 +6,7 @@ using Fusion;
 
 public class ChooseAvatar : MonoBehaviour
 {
-    private Sprite[] _avatarSprites;
-    private Image _avatarImg;
+    [SerializeField] private Sprite[] _avatarSprites;
     private SetUserData _setUserData;
     private int _avatarIdx;
 
@@ -25,7 +24,5 @@ public class ChooseAvatar : MonoBehaviour
     {
         string userId = AuthorizationManager.Instance.Auth.CurrentUser.UserId;
         _setUserData.WriteAvatar(userId, _avatarIdx);
-
-        _avatarImg.sprite = _avatarSprites[_avatarIdx];
     }
 }
