@@ -22,6 +22,13 @@ namespace RacingRunner
         public override void Spawned()
         {
             _playerMovement = GetComponent<PlayerMovement>();
+
+
+
+            //BasicSpawner.Instance.PlayersOnSceneDict.Add(Object.InputAuthority, Object);
+
+
+            //Debug.LogError("Basic spawner: " + BasicSpawner.Instance.PlayersOnSceneDict.Keys);
         }
 
         private void Update()
@@ -35,7 +42,7 @@ namespace RacingRunner
             _timer++;
             Time = _timer;
 
-            Debug.LogError("Speed: " + Speed);
+            //Debug.LogError("Speed: " + Speed);
         }
 
         private string CreateTimer()

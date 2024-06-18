@@ -13,7 +13,7 @@ namespace RacingRunner
         public override void Spawned()
         {
             int carIdx = PlayerPrefs.GetInt(GameplayConstants.CarTag);
-            Runner.Spawn(_carModelPrefabs[carIdx], _spawnPlace.transform.position);
+            Instantiate(_carModelPrefabs[carIdx], _spawnPlace);
         }
     }
 }

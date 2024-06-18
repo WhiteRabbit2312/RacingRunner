@@ -42,9 +42,15 @@ namespace RacingRunner
                         continue;
 
                     Row newRow = new Row();
+
+
                     newRow.Name = item.Child(DatabaseConstants.NameTag).Value.ToString();
                     newRow.Score = int.Parse(item.Child(DatabaseConstants.TimeTag).Value.ToString());
-                    rows.Add(newRow);
+                    if(newRow.Score != 0)
+                    {
+                        rows.Add(newRow);
+
+                    }
 
                 }
 
@@ -60,6 +66,8 @@ namespace RacingRunner
             int placeCount = 1;
 
             var sortedList = rowsToSort.OrderByDescending(n => n.Score).ToList();
+
+            sortedList.Reverse();
 
             List<Row> rowsToSortNew = (List<Row>)sortedList;
 

@@ -47,7 +47,7 @@ namespace RacingRunner
                 }
             }
 
-            _textBestScore.text = "Bast score: " + scoreList.First().ToString();
+            _textBestScore.text = "Best score: " + scoreList.First().ToString();
 
         }
 
@@ -69,17 +69,20 @@ namespace RacingRunner
                 .GetComponent<PlayerInfo>()
                 .Time);
             */
+
+            /*
             _textPlayerScore.text 
                 = "Score: " + BasicSpawner
                 .Instance
                 .PlayersOnSceneDict.First().Value
                 .GetComponent<PlayerInfo>()
-                .Time.ToString();
+                .Time.ToString();*/
 
         }
 
         public void BackToMenu()
         {
+            Runner.Shutdown();
             SceneManager.LoadScene(DatabaseConstants.MenuSceneID);
         }
     }

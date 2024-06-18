@@ -33,7 +33,7 @@ public class Registration : MonoBehaviour
     {
         if (_registrationFields.CheckAuthorization())
         {
-            Debug.LogWarning("Start coroutine");
+            //Debug.LogWarning("Start coroutine");
             StartCoroutine(CheckName());
         }
             
@@ -56,6 +56,9 @@ public class Registration : MonoBehaviour
                 Debug.LogError("CreateUserWithEmailAndPasswordAsync encountered an error: " + task.Exception);
                 return;
             }
+
+            AddUserDataToDatabase();
+            EnterMenuScene();
             /*
             // Firebase user has been created.
             Firebase.Auth.AuthResult result = task.Result;
@@ -67,8 +70,7 @@ public class Registration : MonoBehaviour
 
         
 
-        AddUserDataToDatabase();
-        EnterMenuScene();
+        
     }
 
     private void AddUserDataToDatabase()
@@ -83,6 +85,7 @@ public class Registration : MonoBehaviour
     private void EnterMenuScene()
     {
         SceneManager.LoadScene(DatabaseConstants.MenuSceneID);
+        Destroy(this);
     }
 
     private IEnumerator CheckName()

@@ -588,9 +588,9 @@ GameObject:
   - component: {fileID: 7049741242236216442}
   - component: {fileID: 6173710219342051025}
   - component: {fileID: 4966066520471939080}
-  - component: {fileID: 950851122708313359}
   - component: {fileID: 4917991781350614258}
   - component: {fileID: 2822664986338427285}
+  - component: {fileID: 8984750199574848188}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -660,7 +660,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -683,9 +683,9 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 6173710219342051025}
   - {fileID: 4966066520471939080}
-  - {fileID: 950851122708313359}
   - {fileID: 4917991781350614258}
   - {fileID: 2822664986338427285}
+  - {fileID: 8984750199574848188}
 --- !u!114 &6173710219342051025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,18 +720,6 @@ MonoBehaviour:
   Speed: 20
   Nitro: 0
   Time: 0
---- !u!114 &950851122708313359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5991806648518576269}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f4eab5dd7ce67d4f99276e49511690c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4917991781350614258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -762,11 +750,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _carModelPrefabs:
   - {fileID: 1720750727606104, guid: 142475bf32587464f86a974127ca5f1c, type: 3}
-  - {fileID: 1170052622600160, guid: 2c197f9e9c22d52449cb461925a5876a, type: 3}
+  - {fileID: 1063686525367896, guid: fe5ed12131487254b846805388248640, type: 3}
   - {fileID: 1504709610077770, guid: 6ab5e36b96200d54f9bfd6968bc577de, type: 3}
   - {fileID: 1290022197473952, guid: 3f7bfd9d8ed0e494fb30060acd925091, type: 3}
   - {fileID: 1720750727606104, guid: 142475bf32587464f86a974127ca5f1c, type: 3}
   _spawnPlace: {fileID: 472523802937641176}
+--- !u!114 &8984750199574848188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5991806648518576269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4eab5dd7ce67d4f99276e49511690c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6152736367169331508
 GameObject:
   m_ObjectHideFlags: 0

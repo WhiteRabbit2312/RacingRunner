@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Firebase.Extensions;
 
 public class Login : MonoBehaviour
 {
@@ -12,12 +13,6 @@ public class Login : MonoBehaviour
     [SerializeField] private Button _logInButton;
     
     private Hints _hints;
-
-
-    private void Awake()
-    {
-        
-    }
 
     void Start()
     {
@@ -34,14 +29,19 @@ public class Login : MonoBehaviour
 
     private void HandRegistrationStateClicked()
     {
-        StartCoroutine(routine: CheckLogin(_emailField.text, _passwordField.text));
+        //StartCoroutine(routine: );
+        CheckLogin(_emailField.text, _passwordField.text);
+        
     }
 
-    private IEnumerator CheckLogin(string email, string password)
+    private void CheckLogin(string email, string password)
     {
         var auth = AuthorizationManager.Instance.Auth;
 
-        var logInTask = auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(task => {
+        Debug.LogError("Email: " + email);
+        Debug.LogError("Password: " + password);
+
+        var logInTask = auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task => {
             if (task.IsCanceled)
             {
                 Debug.LogError("SignInWithEmailAndPasswordAsync was canceled.");
@@ -54,12 +54,12 @@ public class Login : MonoBehaviour
                 _hints.EmailOrPasswordWrong();
                 return;
             }
-
+            EnterMenuScene();
+            EnableSilentAuthentification();
         });
 
-        yield return new WaitUntil(predicate: () => logInTask.IsCompleted);
-        EnterMenuScene();
-        EnableSilentAuthentification();
+        //yield return new WaitUntil(predicate: () => logInTask.IsCompleted);
+        
     }
 
     private void EnterMenuScene()

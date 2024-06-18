@@ -30,7 +30,7 @@ public class RegistrationFields : MonoBehaviour
         
         if (IsEmailValid() && CheckPasswordLength() && IsPasswordsMatch())
         {
-            Debug.LogWarning("Check auth");
+            //Debug.LogWarning("Check auth");
             return true;
         }
 
@@ -46,7 +46,7 @@ public class RegistrationFields : MonoBehaviour
 
         if (Regex.IsMatch(_emailField.text, EMAIL_PATTERN))
         {
-            Debug.LogWarning("Verify email");
+            //Debug.LogWarning("Verify email");
             return true;
         }
 

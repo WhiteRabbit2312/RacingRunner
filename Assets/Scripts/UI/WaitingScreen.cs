@@ -14,12 +14,13 @@ namespace RacingRunner
 
         private void Update()
         {
-            Debug.LogError("Player amount: " + BasicSpawner.Instance.PlayersOnSceneDict.Count);
+            //Debug.LogError("Player amount: " + BasicSpawner.Instance.PlayersOnSceneDict.Count);
+            /*
             if(BasicSpawner.Instance.PlayersOnSceneDict.Count == GameplayConstants.RequiredPlayerAmount)
             {
                 _startButton.SetActive(true);
                 _waitingText.SetActive(false);
-            }
+            }*/
             
         }
     }

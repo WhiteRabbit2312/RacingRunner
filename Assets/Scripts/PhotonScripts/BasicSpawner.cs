@@ -7,23 +7,21 @@ using UnityEngine.SceneManagement;
 
 namespace RacingRunner
 {
-    public class BasicSpawner : SimulationBehaviour, IPlayerJoined
+    public class BasicSpawner : SimulationBehaviour
     {
         [SerializeField] private NetworkObject _playerPrefab;
         [SerializeField] private Vector3 _spawnPoint;
         [SerializeField] private Button _connectButton;
 
         public static BasicSpawner Instance;
-        public Dictionary<PlayerRef, NetworkObject> PlayersOnSceneDict = new Dictionary<PlayerRef, NetworkObject>();
+       
 
         [HideInInspector] public NetworkRunner NetRunner;
         
         private string _sessionName = "TestRoom";
 
-
         private void Awake()
         {
-            DontDestroyOnLoad(this);
             Instance = this;
             _connectButton.onClick.AddListener(ConnectButton);
         }
@@ -33,22 +31,24 @@ namespace RacingRunner
             if (NetRunner != null)
                 return;
 
-            NetRunner = gameObject.AddComponent<NetworkRunner>();
-
+            NetRunner ??= gameObject.AddComponent<NetworkRunner>();
+            Debug.LogError("1");
             var scene = SceneRef.FromIndex(SceneManager.GetActiveScene().buildIndex);
             var sceneInfo = new NetworkSceneInfo();
             if (scene.IsValid)
             {
                 sceneInfo.AddSceneRef(scene, LoadSceneMode.Additive);
             }
-
+            Debug.LogError("2");
             await NetRunner.StartGame(new StartGameArgs()
             {
+                
                 GameMode = mode,
                 SessionName = _sessionName,
                 Scene = SceneRef.FromIndex(DatabaseConstants.GameScene),
                 SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>()
             });
+            Debug.LogError("3");
         }
 
         public void ConnectButton()
@@ -59,12 +59,14 @@ namespace RacingRunner
         public void PlayerJoined(PlayerRef player)
         {
             Debug.LogError("Player joined");
-            if (player == Runner.LocalPlayer)
-            {
-                NetworkObject spawnedPlayer = Runner.Spawn(_playerPrefab, _spawnPoint, Quaternion.identity);
 
-                PlayersOnSceneDict.Add(player, spawnedPlayer);
-            }
+            Runner.Spawn(_playerPrefab, _spawnPoint, Quaternion.identity);
+
+            //Debug.LogError("PlayersOnSceneDict " + PlayersOnSceneDict.Count);
+
+            //PlayersOnSceneDict.Add(player, spawnedPlayer);
+
+
         }
     }
 }

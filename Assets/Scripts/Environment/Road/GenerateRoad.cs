@@ -28,6 +28,7 @@ namespace RacingRunner
         [SerializeField] private int _roadLength;
         private List<ChunkFactory> _obstaclesList = new List<ChunkFactory>();
         private ChunkFactory _lastChunk;
+        private bool _once = false;
 
         public override void Spawned()
         {
@@ -39,6 +40,14 @@ namespace RacingRunner
             _lastChunk = new FinishFactory(_finishPrefab);
             
             GenerateMap();
+        }
+
+        public override void FixedUpdateNetwork()
+        {
+            //if (!_once && BasicSpawner.Instance.PlayersOnSceneDict.Count == GameplayConstants.RequiredPlayerAmount)
+            {
+                GenerateMap();
+            }
         }
 
         private void GenerateMap()
@@ -69,10 +78,11 @@ namespace RacingRunner
 
         private void SpawnFinishChunk()
         {
-            Debug.LogError("Spawn finish chunk");
+            //Debug.LogError("Spawn finish chunk");
             float stepForLastChunk = GenerationStep();
-            NetworkObject no = _lastChunk.CreateChunk(_roadLength * stepForLastChunk);
-            Debug.LogError("obstacle: " + no);
+            _lastChunk.CreateChunk(_roadLength * stepForLastChunk);
+            _once = true;
+            //Debug.LogError("obstacle: " + no);
         }
 
         private int ChunkId()

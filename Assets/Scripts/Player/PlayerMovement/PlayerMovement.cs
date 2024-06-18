@@ -47,7 +47,7 @@ namespace RacingRunner
 
         private void Update()
         {
-            _input.Controller();
+            //_input.Controller();
         }
 
         public override void FixedUpdateNetwork()

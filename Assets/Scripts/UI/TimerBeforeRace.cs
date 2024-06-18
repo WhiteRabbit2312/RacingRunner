@@ -29,12 +29,13 @@ namespace RacingRunner
         {
             if (timer <= 0)
             {
+                /*
                 foreach(var item in BasicSpawner.Instance.PlayersOnSceneDict)
                 {
                     item.Value.GetComponent<PlayerMovement>().StartRace = true;
                     _countDownPanel.SetActive(false);
                 }
-
+                */
             }
 
         }

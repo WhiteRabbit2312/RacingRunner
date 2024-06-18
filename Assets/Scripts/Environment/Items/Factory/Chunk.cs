@@ -15,7 +15,7 @@ namespace RacingRunner
         
         public override void FixedUpdateNetwork()
         {
-            Debug.LogError("Chunk");
+            //Debug.LogError("Chunk");
             DetectHit();
         }
 
@@ -33,11 +33,6 @@ namespace RacingRunner
                 if (hit.gameObject.TryGetComponent<PlayerInfo>(out PlayerInfo playerInfo))
                 {
                     MyPlayerInfo = playerInfo;
-                    Debug.LogError("Hit");
-                    //Effect(ref playerInput.Speed);
-
-                    //DestroyItem();
-
                 }
             }
         }
