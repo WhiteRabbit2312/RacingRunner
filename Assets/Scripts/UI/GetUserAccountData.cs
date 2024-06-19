@@ -5,87 +5,93 @@ using UnityEngine.UI;
 using Fusion;
 using Firebase.Database;
 using TMPro;
+using UnityEngine.SceneManagement;
 
-public class GetUserAccountData : NetworkBehaviour
+namespace RacingRunner 
 {
-    [SerializeField] private Image _avatarImg;
-    [SerializeField] private Sprite[] _avatarSprites;
-    [SerializeField] private TextMeshProUGUI _nameText;
-    [SerializeField] private GameObject _countDownPanel;
-
-    [SerializeField] private GameObject _showPlayersPanel;
-    [SerializeField] private GameObject _waitingPanel;
-
-    private readonly float _showUsersTime = 5f;
-    private bool _startCountDown = false;
-
-    public bool StartCountDown
+    public class GetUserAccountData : NetworkBehaviour
     {
+        [SerializeField] private Image _avatarImg;
+        [SerializeField] private Sprite[] _avatarSprites;
+        [SerializeField] private TextMeshProUGUI _nameText;
+        [SerializeField] private GameObject _countDownPanel;
 
-        get
+        [SerializeField] private GameObject _showPlayersPanel;
+        [SerializeField] private GameObject _waitingPanel;
+
+        private readonly float _showUsersTime = 5f;
+        private bool _startCountDown = false;
+
+        public bool StartCountDown
         {
-            return _startCountDown;
+            get
+            {
+                return _startCountDown;
+            }
+
+            set { }
         }
 
-        set { }
-    }
+        public object Constants { get; private set; }
 
-    public void StartGame()
-    {
-        _showPlayersPanel.SetActive(true);
-        _waitingPanel.SetActive(false);
-
-        StartCoroutine(ShowUsers());
-        StartCoroutine(GetUserAvatarCoroutine());
-        StartCoroutine(GetUserNameCoroutine());
-    }
-
-    private IEnumerator GetUserAvatarCoroutine()
-    {
-        string userID = AuthorizationManager.Instance.Auth.CurrentUser.UserId;
-        var task = DatabaseManager.Instance.Reference.Child(DatabaseConstants.UserTag).Child(userID).Child(DatabaseConstants.AvatarTag).GetValueAsync();
-
-        yield return new WaitUntil(() => task.IsCompleted);
-
-        if (task.IsFaulted || task.IsCanceled)
+        public void StartGame()
         {
-            Debug.LogError("Error when getting avatar");
+            _showPlayersPanel.SetActive(true);
+            _waitingPanel.SetActive(false);
+
+            StartCoroutine(ShowUsers());
+            StartCoroutine(GetUserAvatarCoroutine());
+            StartCoroutine(GetUserNameCoroutine());
         }
 
-        else
+        private IEnumerator GetUserAvatarCoroutine()
         {
-            Debug.LogError("task: " + task);
-            DataSnapshot snapshot = task.Result;
-            Debug.LogError("snapshot: " + snapshot);
-            int avatarId = int.Parse(snapshot.Value.ToString());
-            _avatarImg.sprite = _avatarSprites[avatarId];
+            string userID = AuthorizationManager.Instance.Auth.CurrentUser.UserId;
+            var task = DatabaseManager.Instance.Reference.Child(DatabaseConstants.UserTag).Child(userID).Child(DatabaseConstants.AvatarTag).GetValueAsync();
+
+            yield return new WaitUntil(() => task.IsCompleted);
+
+            if (task.IsFaulted || task.IsCanceled)
+            {
+                Debug.LogError("Error when getting avatar");
+            }
+
+            else
+            {
+                Debug.LogError("task: " + task);
+                DataSnapshot snapshot = task.Result;
+                Debug.LogError("snapshot: " + snapshot);
+                int avatarId = int.Parse(snapshot.Value.ToString());
+                _avatarImg.sprite = _avatarSprites[avatarId];
+            }
         }
-    }
-    private IEnumerator GetUserNameCoroutine()
-    {
-        string userID = AuthorizationManager.Instance.Auth.CurrentUser.UserId;
-        var task = DatabaseManager.Instance.Reference.Child(DatabaseConstants.UserTag).Child(userID).Child(DatabaseConstants.NameTag).GetValueAsync();
-
-        yield return new WaitUntil(() => task.IsCompleted);
-
-        if (task.IsFaulted || task.IsCanceled)
+        private IEnumerator GetUserNameCoroutine()
         {
-            Debug.LogError("Error when getting name");
+            string userID = AuthorizationManager.Instance.Auth.CurrentUser.UserId;
+            var task = DatabaseManager.Instance.Reference.Child(DatabaseConstants.UserTag).Child(userID).Child(DatabaseConstants.NameTag).GetValueAsync();
+
+            yield return new WaitUntil(() => task.IsCompleted);
+
+            if (task.IsFaulted || task.IsCanceled)
+            {
+                Debug.LogError("Error when getting name");
+            }
+
+            else
+            {
+                DataSnapshot snapshot = task.Result;
+                _nameText.text = snapshot.Value.ToString();
+            }
+
         }
 
-        else
+        private IEnumerator ShowUsers()
         {
-            DataSnapshot snapshot = task.Result;
-            _nameText.text = snapshot.Value.ToString();
+            yield return new WaitForSeconds(_showUsersTime);
+            _startCountDown = true;
+            SceneRef scene = SceneRef.FromIndex(SceneUtility.GetBuildIndexByScenePath($"Scenes/GameScene"));
+            Runner.LoadScene(scene);
+            //SceneManager.LoadScene(DatabaseConstants.GameSceneID);
         }
-
-    }
-
-    private IEnumerator ShowUsers()
-    {
-        yield return new WaitForSeconds(_showUsersTime);
-        _startCountDown = true;
-        _countDownPanel.SetActive(true);
-        _showPlayersPanel.SetActive(false);
     }
 }

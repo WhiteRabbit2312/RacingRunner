@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Firebase.Database;
 using TMPro;
 using System.Linq;
 using Fusion;
@@ -15,8 +14,11 @@ namespace RacingRunner
         [SerializeField] private TextMeshProUGUI _textPlayerScore;
         [SerializeField] private TextMeshProUGUI _textPlayerPlace;
 
+        private PlayerInfo _playerInfo;
+
         private void Awake()
         {
+            _playerInfo = FindObjectOfType<PlayerInfo>();
             StartCoroutine(Place());
             Debug.LogError("_textPlayerScore " + _textPlayerScore);
             GetPlayerScore();
@@ -70,13 +72,11 @@ namespace RacingRunner
                 .Time);
             */
 
-            /*
-            _textPlayerScore.text 
-                = "Score: " + BasicSpawner
-                .Instance
-                .PlayersOnSceneDict.First().Value
-                .GetComponent<PlayerInfo>()
-                .Time.ToString();*/
+
+            _textPlayerScore.text
+                = "Score: " +
+                _playerInfo
+                .Time.ToString();
 
         }
 

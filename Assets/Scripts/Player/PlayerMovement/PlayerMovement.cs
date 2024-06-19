@@ -12,29 +12,33 @@ namespace RacingRunner
         [SerializeField] private float _rightPosition;
         [SerializeField] private float _speedCoordX;
 
+        private TimerBeforeRace _timerBeforeRace;
         private PlayerInfo _playerInfo;
 
         private IMovement _input;
         private PlayerPosition _playerPosition;
-
         private bool _startRace;
 
-        public bool StartRace
+        public bool StartRace 
         {
             get
             {
                 return _startRace;
             }
+
             set
             {
                 _startRace = value;
             }
         }
 
+
         public override void Spawned()
         {
             _playerPosition = PlayerPosition.Center;
             _playerInfo = GetComponent<PlayerInfo>();
+
+            StartCoroutine(WaitToStartRace());
 
 #if UNITY_EDITOR
 
@@ -47,7 +51,7 @@ namespace RacingRunner
 
         private void Update()
         {
-            //_input.Controller();
+            _input.Controller();
         }
 
         public override void FixedUpdateNetwork()
@@ -56,6 +60,13 @@ namespace RacingRunner
                 return;
 
             Movement();
+        }
+
+        private IEnumerator WaitToStartRace()
+        {
+            yield return new WaitForSeconds(4f);
+            Debug.LogError("WaitTostart");
+            _startRace = true;
         }
 
         private void Movement()

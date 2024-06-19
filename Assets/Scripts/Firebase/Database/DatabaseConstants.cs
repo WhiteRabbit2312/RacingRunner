@@ -11,7 +11,8 @@ public class DatabaseConstants
 
     public const int AuthScene = 0;
     public const int MenuSceneID = 1;
-    public const int GameScene = 2;
+    public const int WaitingSceneID = 2;
+    public const int GameSceneID = 3;
 
     public const int MinPasswordLength = 6;
     public const int MaxPasswordLength = 15;

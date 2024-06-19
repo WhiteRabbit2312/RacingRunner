@@ -14,7 +14,6 @@ namespace RacingRunner
         [SerializeField] private Button _connectButton;
 
         public static BasicSpawner Instance;
-       
 
         [HideInInspector] public NetworkRunner NetRunner;
         
@@ -45,7 +44,7 @@ namespace RacingRunner
                 
                 GameMode = mode,
                 SessionName = _sessionName,
-                Scene = SceneRef.FromIndex(DatabaseConstants.GameScene),
+                Scene = SceneRef.FromIndex(DatabaseConstants.WaitingSceneID),
                 SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>()
             });
             Debug.LogError("3");
@@ -56,6 +55,7 @@ namespace RacingRunner
             StartGame(GameMode.Shared);
         }
 
+        /*
         public void PlayerJoined(PlayerRef player)
         {
             Debug.LogError("Player joined");
@@ -67,6 +67,6 @@ namespace RacingRunner
             //PlayersOnSceneDict.Add(player, spawnedPlayer);
 
 
-        }
+        }*/
     }
 }

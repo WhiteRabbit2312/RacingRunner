@@ -45,13 +45,13 @@ namespace RacingRunner
         public override void FixedUpdateNetwork()
         {
             //if (!_once && BasicSpawner.Instance.PlayersOnSceneDict.Count == GameplayConstants.RequiredPlayerAmount)
-            {
-                GenerateMap();
-            }
+
+
         }
 
         private void GenerateMap()
         {
+            Debug.LogError("Generat map");
             SpawnEmptyChunks();
             SpawnRandomChunks();
             SpawnFinishChunk();
