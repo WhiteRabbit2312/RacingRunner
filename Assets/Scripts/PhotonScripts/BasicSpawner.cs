@@ -30,7 +30,7 @@ namespace RacingRunner
             if (NetRunner != null)
                 return;
 
-            NetRunner ??= gameObject.AddComponent<NetworkRunner>();
+            NetRunner = gameObject.AddComponent<NetworkRunner>();
             Debug.LogError("1");
             var scene = SceneRef.FromIndex(SceneManager.GetActiveScene().buildIndex);
             var sceneInfo = new NetworkSceneInfo();

@@ -20,7 +20,7 @@ namespace RacingRunner
         {
             _playerInfo = FindObjectOfType<PlayerInfo>();
             StartCoroutine(Place());
-            Debug.LogError("_textPlayerScore " + _textPlayerScore);
+            //Debug.LogError("_textPlayerScore " + _textPlayerScore);
             GetPlayerScore();
         }
 
@@ -39,8 +39,8 @@ namespace RacingRunner
             int place = 0; 
             foreach(var item in task.Result.Children)
             {
-                Debug.LogError("item.Key " + item.Key);
-                Debug.LogError("item.Value.ToString() " + item.Value.ToString());
+                //Debug.LogError("item.Key " + item.Key);
+                //Debug.LogError("item.Value.ToString() " + item.Value.ToString());
                 scoreList.Add(int.Parse(item.Child(DatabaseConstants.TimeTag).Value.ToString()));
                 place++;
                 if(userId == item.Key)

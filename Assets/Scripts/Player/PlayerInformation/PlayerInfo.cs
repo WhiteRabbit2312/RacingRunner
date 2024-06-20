@@ -23,10 +23,7 @@ namespace RacingRunner
         {
             _playerMovement = GetComponent<PlayerMovement>();
 
-
-
             //BasicSpawner.Instance.PlayersOnSceneDict.Add(Object.InputAuthority, Object);
-
 
             //Debug.LogError("Basic spawner: " + BasicSpawner.Instance.PlayersOnSceneDict.Keys);
         }

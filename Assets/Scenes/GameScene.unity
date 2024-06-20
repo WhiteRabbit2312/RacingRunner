@@ -1259,7 +1259,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _countDownPanel: {fileID: 324499597}
   _countDownText: {fileID: 930442427}
-  _getUserAccountData: {fileID: 0}
 --- !u!1 &918728911
 GameObject:
   m_ObjectHideFlags: 0

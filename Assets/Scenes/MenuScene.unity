@@ -5339,7 +5339,6 @@ GameObject:
   - component: {fileID: 1719940366}
   - component: {fileID: 1719940369}
   - component: {fileID: 1719940368}
-  - component: {fileID: 1719940370}
   m_Layer: 0
   m_Name: BasicSpawner
   m_TagString: Untagged
@@ -5363,8 +5362,6 @@ MonoBehaviour:
   _spawnPoint: {x: 0, y: 1, z: 0}
   _connectButton: {fileID: 1156144572}
   NetRunner: {fileID: 0}
-  _PlayersOnSceneDict:
-    _items: []
 --- !u!4 &1719940367
 Transform:
   m_ObjectHideFlags: 0
@@ -5461,24 +5458,6 @@ MonoBehaviour:
   OnObjectExitAOI:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1719940370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1719940365}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SortKey: 2284272302
-  ObjectInterest: 1
-  Flags: 262145
-  NestedObjects: []
-  NetworkedBehaviours:
-  - {fileID: 1719940366}
 --- !u!1 &1754133368
 GameObject:
   m_ObjectHideFlags: 0
